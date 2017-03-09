@@ -900,8 +900,7 @@ int main(int argc, char* argv[]) {
 		double tsqrerror = 0.0;
         
 		my_start_all(&req_array_u[0][0]);
-		my_wait_all(&req_array_u[0][0]);
-		fprintf(stderr, "TELEIWSA PRWTO WAIT---------!!!!!!!!\n" );
+		
 	#ifdef _PRECALC_
 		my_start_all(&req_array_ffh[0][0]);
 		my_start_all(&req_array_ggh[0][0]);
