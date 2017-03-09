@@ -916,8 +916,8 @@ int main(int argc, char* argv[]) {
 		my_start_all(&req_array_w[0][0]);
 
 		fprintf(stderr, "TELEIWSA TA START --------------------!!!\n" );
-	/*	my_wait_all(&req_array_u[0][0]);
-		fprintf(stderr, "TELEIWSA PRWTO WAIT---------!!!!!!!!\n" );*/
+		my_wait_all(&req_array_u[0][0]);
+		fprintf(stderr, "TELEIWSA PRWTO WAIT---------!!!!!!!!\n" );
 	
 	#ifdef _PRECALC_
 		my_wait_all(&req_array_ffh[0][0]);
