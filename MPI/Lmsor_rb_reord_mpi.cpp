@@ -9,7 +9,6 @@
 #include <string.h>
 #include <limits.h>
 #include <float.h>
-#include "timestamp.h"
 #include <mpi.h>
 #ifdef _OPENMP
 #include <omp.h>
@@ -24,7 +23,7 @@ inline int omp_get_thread_num(void){return 0;}
 #define __SIMD_SUPPORTED__
 #endif
 
-#define ERROR_CHECK_ITERS 100
+#define ERROR_CHECK_ITERS 20
 #define CHECK_SQRERROR 1
 
 #ifndef NMAX
@@ -63,10 +62,10 @@ inline int omp_get_thread_num(void){return 0;}
 
 inline void mypause(void){
   printf("Press \"Enter\"\n");
-  timestamp ts = getTimestamp();
+  double ts = MPI_Wtime();
   do {
     getchar();
-  } while( getElapsedtime(ts)<100.0f );
+  } while( (MPI_Wtime()-ts) < 10.0 );
 }
 
 inline long int pow(int b, int e){
@@ -89,13 +88,11 @@ inline void validate_w(double w){
 
 
 class regular_array{
-	double *av; //MAX MAX
+	double *av; 
 	int size;
 public:
 	
-	/*~regular_array(){
-		delete[] av;
-	}*/
+	
 	inline void set(int row, int col, double v){
 		*(av+(row*(this->size))+col) = v;
 	}
@@ -114,25 +111,16 @@ public:
 	inline int get_size(){
 		return this->size;
 	}
-	/*
-	inline void allocate_array(){
-		fprintf(stderr, "size = %d\n", this->size );
-		av = new double*[this->size];
-		for(int i = 0; i<this->size; i++){
-			av[i] = new double[this->size];
-		}
-	}*/
+	
 };
 
 
 class redblack_array{
-	double *av;  //[2][MAX][_ALIGN_SZ_(MAX/2, _DBLS_PER_CACHE_LINE_)]
+	double *av;  
 	int size;
 public:
 	
-	/*~redblack_array(){
-		delete[] av;
-	}*/
+	
 	inline void set(int row, int col, double v){
 		if( (row+col)%2==0 )
 			*(av+(row*((_ALIGN_SZ_((this->size), _DBLS_PER_CACHE_LINE_))+2))+(col/2)) = v;
@@ -145,9 +133,11 @@ public:
 		else
 			return *(av+((this->size)*((_ALIGN_SZ_((this->size), _DBLS_PER_CACHE_LINE_))+2))+(row*((_ALIGN_SZ_((this->size), _DBLS_PER_CACHE_LINE_))+2))+(col/2));
 	}
-	/*inline double**** _get_array(){
-		return &av;
-	}*/
+
+
+
+	
+	
 	inline double* _get_data(int i){
 		return av+i*((this->size)*((_ALIGN_SZ_((this->size), _DBLS_PER_CACHE_LINE_))+2));
 	}
@@ -176,18 +166,9 @@ public:
 			for(int ix=0; ix<(get_size()); ix++)
 				arr.set(iy, ix, get(iy, ix));
 	}
-/*
-	inline void allocate_array(){
-		av = new double**[2];
-		for(int i = 0; i<2; i++){
-			av[i] = new double*[this->size];
-			for(int y=0; y<this->size; y++){
-				av[i][y] = new double[_ALIGN_SZ_((this->size)/2, _DBLS_PER_CACHE_LINE_)];
-			}
-		}
-	}*/
-};
 
+};
+	
 
 	inline void send_recv_init(double* av,int up,int down,int left,int right,MPI_Comm new_comm,MPI_Datatype col_type,MPI_Request* reqs,int *tags,int block_size){
 
@@ -204,18 +185,7 @@ public:
  	MPI_Recv_init( av+block_size+block_size-1, 1, col_type, right, tags[3], new_comm, reqs+7);
 
 
-/*
- 	MPI_Send_init( &(av[1][1]), block_size-2, MPI_DOUBLE, up, tags[1], new_comm, reqs); //send first row of initial array
-	MPI_Send_init( &(av[block_size-2][1]), block_size-2, MPI_DOUBLE, down, tags[0], new_comm, reqs+1 );  //send last row of initial array
-	MPI_Send_init( &(av[1][1]), 1, col_type, left, tags[3], new_comm, reqs+2 );			//send left column 
-	MPI_Send_init( &(av[1][block_size-2]), 1, col_type, right, tags[2], new_comm, reqs+3 );		//send right column
 
-	MPI_Recv_init( &(av[0][1]), block_size-2, MPI_DOUBLE, up, tags[0], new_comm, reqs+4 );		
-	MPI_Recv_init( &(av[block_size-1][1]), block_size-2, MPI_DOUBLE, down, tags[1], new_comm, reqs+5 );
- 	MPI_Recv_init( &(av[1][0]), 1,col_type, left, tags[2],new_comm, reqs+6 );
- 	MPI_Recv_init( &(av[1][block_size-1]), 1, col_type, right, tags[3], new_comm, reqs+7);
-*/
- 	//fprintf(stderr, "req prwto mesa sti synartisi = %d\n",*(reqs) );
 
  	return;
 }
@@ -237,51 +207,12 @@ public:
  	MPI_Recv_init( av+columns+columns-1, 1, col_type, right, tags[3], new_comm, reqs+7); //receive right column
 
 
-/*
- 	MPI_Send_init( &(av[1][1]), block_size-2, MPI_DOUBLE, up, tags[1], new_comm, reqs); //send first row of initial array
-	MPI_Send_init( &(av[block_size-2][1]), block_size-2, MPI_DOUBLE, down, tags[0], new_comm, reqs+1 );  //send last row of initial array
-	MPI_Send_init( &(av[1][1]), 1, col_type, left, tags[3], new_comm, reqs+2 );			//send left column 
-	MPI_Send_init( &(av[1][block_size-2]), 1, col_type, right, tags[2], new_comm, reqs+3 );		//send right column
 
-	MPI_Recv_init( &(av[0][1]), block_size-2, MPI_DOUBLE, up, tags[0], new_comm, reqs+4 );		
-	MPI_Recv_init( &(av[block_size-1][1]), block_size-2, MPI_DOUBLE, down, tags[1], new_comm, reqs+5 );
- 	MPI_Recv_init( &(av[1][0]), 1,col_type, left, tags[2],new_comm, reqs+6 );
- 	MPI_Recv_init( &(av[1][block_size-1]), 1, col_type, right, tags[3], new_comm, reqs+7);
-*/
- 	//fprintf(stderr, "req prwto mesa sti synartisi = %d\n",*(reqs) );
 
  	return;
 }
 
-void my_start_all(MPI_Request* reqs){
 
-		MPI_Start(reqs);
-		MPI_Start(reqs+1);
-		MPI_Start(reqs+2);
-		MPI_Start(reqs+3);
-		MPI_Start(reqs+4);
-		MPI_Start(reqs+5);
-		MPI_Start(reqs+6);
-		MPI_Start(reqs+7);
-
-
-	return;
-}
-
-void my_wait_all(MPI_Request *reqs){
-
-		MPI_Wait(reqs,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+1,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+2,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+3,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+4,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+5,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+6,MPI_STATUSES_IGNORE);
-		MPI_Wait(reqs+7,MPI_STATUSES_IGNORE);
-
-
-		return;
-}
 
 regular_array arr_u;
 #ifdef _PRECALC_
@@ -321,8 +252,13 @@ inline double calcPointUpdErr(const int pitch, const int line_indicator, double 
 	return new_val;
 }
 
+
+
+
+
+
 template<int phase>
-inline void calcSegment(const int bound_s_x, const int bound_e_x, const int bound_s_y, const int bound_e_y, double &sqrerror, int block_size, int taskid, int it){
+inline void calcSegment2(const int bound_s_x, const int bound_e_x, const int bound_s_y, const int bound_e_y, double &sqrerror, int block_size, int taskid, int it){
 
 #ifdef _INTRINSIC_SSE2_
 
@@ -414,11 +350,20 @@ inline void calcSegment(const int bound_s_x, const int bound_e_x, const int boun
 		}
 	}
 //	_mm_sfence();
-
+	
 #else
-	for(int i=bound_s_y; i<bound_e_y; i++){
-		for(int j=bound_s_x; j<bound_e_x; j++){
-			if ( (i+j)%2 == phase ) {
+	int j = 0 ;
+	for(int i=bound_s_y; i < bound_e_y; i++){
+		for(int jj=bound_s_x; jj < bound_e_x; jj++){
+
+			if(phase == 0){
+				j = jj*2;
+			}
+
+			else{
+				j = (jj*2) + 1;
+			}
+			
 				double old_val = ro_u.get(i, j);
 #ifdef _PRECALC_
 				double r=1.-ro_ffh.get(i, j);
@@ -440,15 +385,18 @@ inline void calcSegment(const int bound_s_x, const int bound_e_x, const int boun
 				sqrerror += pow2(old_val - ro_u.get(i, j));
 				
 				
-//				double max1 = fabs(ro_u.get(i, j));
-//				if( tmax<max1 ) tmax = max1;
-			}
+
+			
 			
 		}
 	}
 #endif
-//fprintf(stderr,"TELOS TIS CALCSEGMENTTT!!!! eimai to task me id= %d\n",taskid);
 }
+
+
+
+
+
 
 // Zeroes all values in involved matrices by using the same thread assignment used during computation
 // so memory is local to assigned processors on NUMA architectures
@@ -470,7 +418,7 @@ void firstTouch(int block_size,int num_of_threads){
 		int bs_x=n/sx, bs_y=n/sy, lastoffset_x=n%sx, lastoffset_y=n%sy;
 		int start_pos_x = 1+bs_x * (omp_get_thread_num()%sx), start_pos_y=1+bs_y * (omp_get_thread_num()/sx), end_pos_x=start_pos_x+bs_x+(omp_get_thread_num()%sx==sx-1?lastoffset_x:0), end_pos_y=start_pos_y+bs_y+(omp_get_thread_num()/sx==sy-1?lastoffset_y:0);
 
-		//for(int i=start_pos_y; i<end_pos_y; i++)
+		
 		for(int i=start_pos_y; i<end_pos_y; i++)
 			for(int j=start_pos_x; j<end_pos_x; j++){
 				arr_u.set(i, j, 0.0);
@@ -493,25 +441,10 @@ void firstTouch(int block_size,int num_of_threads){
 				ro_t.set(i, j, 0);
 				ro_b.set(i, j, 0);
 #endif
-//				d.set(i, j, 0);
+
 			}
 	}
-/*#pragma omp parallel for
-	for(int i=0; i<NMAX; i++)
-      for(int j=0; j<NMAX; j++) {
-		u.set(i, j, 0.0);
-//		u.set_buf(i, j, 0.0);
-		w.set(i, j, 0.0);
-#ifdef _PRECALC_
-				ffh.set(i, j, 0);
-				ggh.set(i, j, 0);
-#else
-				l.set(i, j, 0);
-				r.set(i, j, 0);
-				t.set(i, j, 0);
-				b.set(i, j, 0);
-#endif
-      }*/
+
 
 }
 
@@ -530,7 +463,7 @@ int build_omega(FILE *arxeio, double re, long &cI, long &cR, double &min_w1, dou
 	int n=nn-1;
     double h=1./(n+1.0);
 //    printf("Starting up...");
-    timestamp ts_start = getTimestamp();
+    double ts_start = MPI_Wtime();
 #pragma omp parallel for private(j,x,y,C_E,C_W,C_N,C_S,g1,g2) firstprivate(periptosi, tperiptosi) reduction(+ : cImags, cReals) num_threads(num_of_threads)
     for(i=0; i<=n+1; i++) {
       x=i*h;
@@ -647,7 +580,8 @@ int build_omega(FILE *arxeio, double re, long &cI, long &cR, double &min_w1, dou
 		  }
 	  }
     } /*end for i */
-    printf(" %f seconds\n", getElapsedtime(ts_start)/1000.0);
+    double ts_end = MPI_Wtime();
+    printf(" %f seconds\n", ts_end-ts_start);
 
     switch(gperiptosi) {
 		case 1:
@@ -692,26 +626,27 @@ int build_omega(FILE *arxeio, double re, long &cI, long &cR, double &min_w1, dou
 
 int main(int argc, char* argv[]) {
 
-  long i,j,k,metr;
-  k=1;
+  double inner_block_time = 0;
+  double temp_start_inner_block_time = 0;
+  double temp_end_inner_block_time = 0;
+
+  long i,j,metr;
+  int no_error = 1;
   int epilogi, periptosi=0, ektyp1, ektyp2;
   long maxiter;
-  	//int nn=NMAX-1;
-	//int n=nn-1;
-//  double D;
+ 
   double min_w1, max_w1, min_w2, max_w2, min_m_low, max_m_low, min_m_up, max_m_up;
   double x, y;
-   // double h=1./(n+1.0);
-//  double C_E, C_W, C_N, C_S, g1, g2;
+   
   double e1=1.0e-6, sqrerror, re;
   char filename[20];
-	timestamp ts_start;
+  double ts_start;
   FILE *arxeio;
 
   int numtasks,taskid;
 
 #ifdef _PRECALC_
-	fprintf(stderr, "EINAI ORISMENOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" );
+	
 #endif
 
 
@@ -784,7 +719,6 @@ int main(int argc, char* argv[]) {
   int block_size;
   int root = sqrt(numtasks);
   block_size = NMAX/root;
-  fprintf(stderr, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!block_size = %d\n",block_size );
 
   int nn=block_size-1;
   int n=nn-1;
@@ -903,17 +837,12 @@ int main(int argc, char* argv[]) {
   int square_workers = sqrt(numtasks);
 
   MPI_Datatype col_type;
-  MPI_Datatype block_type;
-  MPI_Datatype inner_block;
   MPI_Datatype ro_col_type;
+  
   MPI_Type_vector(block_size-2,1,block_size,MPI_DOUBLE,&col_type);
-  MPI_Type_vector(block_size-2,block_size-2,NMAX,MPI_DOUBLE,&block_type);
-  MPI_Type_vector(block_size-2,block_size-2,block_size,MPI_DOUBLE,&inner_block);
   MPI_Type_vector(block_size-2,1,columns+2,MPI_DOUBLE,&ro_col_type);
 
   MPI_Type_commit(&col_type);
-  MPI_Type_commit(&block_type);
-  MPI_Type_commit(&inner_block);
   MPI_Type_commit(&ro_col_type);
 
   /* Creation of a new communicator */
@@ -958,7 +887,7 @@ int main(int argc, char* argv[]) {
 	printf("R/B LOCAL SOR method (5 point)\n");
 #endif
 
-//printf("!!!! n=%d\n", n);
+
 
 #pragma omp parallel for private(j,x,y) num_threads(atoi(argv[7]))
     for(i=0; i<=n+1; i++) {
@@ -967,66 +896,40 @@ int main(int argc, char* argv[]) {
         y=j*h;
 		arr_u.set(i, j, initial_guess(x,y));
 		
-			/*if(taskid==0 && (omp_get_thread_num()==0)){
-				fprintf(stderr, "arr_u[%d][%d]=%f\n",i,j,arr_u.get(i,j) );
-			}*/
 			
-//printf("!!!%f,%f max=%f u=%f w=%f\n", x, y, max1, u.get(i, j), w.get(i, j));
-/*        u0[i][j]=initial_guess(x,y);
-        u1[i][j]=u0[i][j];*/
       }
     }
     metr=0;
 
-	// Forward Reordering
-	ts_start = getTimestamp();
-/*	ro_u.copyfrom(arr_u);
-#ifdef _PRECALC_
-	ro_ffh.copyfrom(arr_ffh);
-	ro_ggh.copyfrom(arr_ggh);
-#else
-	ro_l.copyfrom(arr_l);
-	ro_r.copyfrom(arr_r);
-	ro_t.copyfrom(arr_t);
-	ro_b.copyfrom(arr_b);
-#endif
-	ro_w.copyfrom(arr_w);*/
-	double reorderFwTime = getElapsedtime(ts_start)/1000.0f;
+	
+	
 
-	ts_start = getTimestamp();
+
 	int up,down,left,right;
-	MPI_Cart_shift(new_comm, 0,1,&up,&down);
+
+	//define up,down,right and left neighbour
+	MPI_Cart_shift(new_comm, 0,1,&up,&down);	
     MPI_Cart_shift(new_comm, 1,1,&left,&right);
 
 
-	MPI_Request req_array_u[2][4];
+	MPI_Request req_array_u[2][4];		//define mpi_requests for arr_u array communications (sendings and receptions)
 
 #ifdef _PRECALC_
-	MPI_Request req_array_ffh[2][4];
-	MPI_Request req_array_ggh[2][4];
+	MPI_Request req_array_ffh[2][4];	//define mpi_requests for arr_ffh array communications (sendings and receptions)
+	MPI_Request req_array_ggh[2][4];	//define mpi_requests for arr_ggh array communications (sendings and receptions)
 #else
-	MPI_Request req_array_l[2][4];
-	MPI_Request req_array_r[2][4];
-	MPI_Request req_array_t[2][4];
-	MPI_Request req_array_b[2][4];
+	MPI_Request req_array_l[2][4];		//define mpi_requests for arr_l array communications (sendings and receptions)
+	MPI_Request req_array_r[2][4];		//define mpi_requests for arr_r array communications (sendings and receptions)
+	MPI_Request req_array_t[2][4];		//define mpi_requests for arr_t array communications (sendings and receptions)
+	MPI_Request req_array_b[2][4];		//define mpi_requests for arr_b array communications (sendings and receptions)
 #endif
-	MPI_Request req_array_w[2][4];
+	MPI_Request req_array_w[2][4];		//define mpi_requests for arr_w array communications (sendings and receptions)
 
 int error_sum=0;
 int it_counter=0;
 
 
-
-
-	 
-
-
-
     int tag_array_u[] = {0,1,2,3};
-
-
-
-
 
 	send_recv_init(arr_u._get_data(),up,down,left,right,new_comm,col_type,&req_array_u[0][0],tag_array_u,block_size);
 
@@ -1061,7 +964,7 @@ int it_counter=0;
 	MPI_Start(&req_array_ffh[1][2]);
 	MPI_Start(&req_array_ffh[1][3]);
 
-	//my_start_all(&req_array_ffh[0][0]);
+	
 
 	MPI_Start(&req_array_ggh[0][0]);
 	MPI_Start(&req_array_ggh[0][1]);
@@ -1072,7 +975,7 @@ int it_counter=0;
 	MPI_Start(&req_array_ggh[1][2]);
 	MPI_Start(&req_array_ggh[1][3]);
 
-	//my_start_all(&req_array_ggh[0][0]);
+	
 	
 #else
 
@@ -1085,7 +988,7 @@ int it_counter=0;
 	MPI_Start(&req_array_l[1][2]);
 	MPI_Start(&req_array_l[1][3]);
 
-	//my_start_all(&req_array_l[0][0]);
+	
 
 	MPI_Start(&req_array_r[0][0]);
 	MPI_Start(&req_array_r[0][1]);
@@ -1096,7 +999,7 @@ int it_counter=0;
 	MPI_Start(&req_array_r[1][2]);
 	MPI_Start(&req_array_r[1][3]);
 	
-	//my_start_all(&req_array_r[0][0]);
+	
 
 	MPI_Start(&req_array_t[0][0]);
 	MPI_Start(&req_array_t[0][1]);
@@ -1107,7 +1010,6 @@ int it_counter=0;
 	MPI_Start(&req_array_t[1][2]);
 	MPI_Start(&req_array_t[1][3]);
 
-//	my_start_all(&req_array_t[0][0]);
 
 	MPI_Start(&req_array_b[0][0]);
 	MPI_Start(&req_array_b[0][1]);
@@ -1117,7 +1019,6 @@ int it_counter=0;
 	MPI_Start(&req_array_b[1][1]);
 	MPI_Start(&req_array_b[1][2]);
 	MPI_Start(&req_array_b[1][3]);
-	//my_start_all(&req_array_b[0][0]);
 	
 #endif
 
@@ -1130,7 +1031,6 @@ int it_counter=0;
 	MPI_Start(&req_array_w[1][2]);
 	MPI_Start(&req_array_w[1][3]);
 
-//	my_start_all(&req_array_w[0][0]);
 
 #ifdef _PRECALC_
 
@@ -1143,7 +1043,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_ffh[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_ffh[1][3],MPI_STATUSES_IGNORE);
 
-	//my_wait_all(&req_array_ffh[0][0]);
 
 	MPI_Wait(&req_array_ggh[0][0],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_ggh[0][1],MPI_STATUSES_IGNORE);
@@ -1153,7 +1052,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_ggh[1][1],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_ggh[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_ggh[1][3],MPI_STATUSES_IGNORE);	
-	//my_wait_all(&req_array_ggh[0][0]);
 
 #else
 
@@ -1166,7 +1064,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_l[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_l[1][3],MPI_STATUSES_IGNORE);
 
-	//my_wait_all(&req_array_l[0][0]);
 
 	MPI_Wait(&req_array_r[0][0],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_r[0][1],MPI_STATUSES_IGNORE);
@@ -1177,7 +1074,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_r[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_r[1][3],MPI_STATUSES_IGNORE);
 
-	//my_wait_all(&req_array_r[0][0]);
 
 	MPI_Wait(&req_array_t[0][0],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_t[0][1],MPI_STATUSES_IGNORE);
@@ -1188,7 +1084,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_t[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_t[1][3],MPI_STATUSES_IGNORE);
 
-	//my_wait_all(&req_array_t[0][0]);	
 
 	MPI_Wait(&req_array_b[0][0],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_b[0][1],MPI_STATUSES_IGNORE);
@@ -1199,7 +1094,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_b[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_b[1][3],MPI_STATUSES_IGNORE);
 
-	//my_wait_all(&req_array_b[0][0]);
 
 #endif
 
@@ -1212,7 +1106,6 @@ int it_counter=0;
 	MPI_Wait(&req_array_w[1][2],MPI_STATUSES_IGNORE);
 	MPI_Wait(&req_array_w[1][3],MPI_STATUSES_IGNORE);
 
-	//my_wait_all(&req_array_w[0][0]);
 
 #ifdef _PRECALC_
 	
@@ -1227,7 +1120,6 @@ int it_counter=0;
 	ro_b.copyfrom(arr_b);
 #endif
 	
-	//ro_w.set(0,1,arr_w.get(0,1));
 	
 	ro_w.copyfrom(arr_w);
 	
@@ -1257,151 +1149,204 @@ int it_counter=0;
 	int tag_array_ro_u_red[] = {24,25,26,27};
 	int tag_array_ro_u_black[] = {28,29,30,31};
  	
+	double* ro_u_pointer;
+
+	ro_u_pointer = ro_u.get_pointer();
+
+	double tsqrerror = 0.0;
+	int local_error = 0;
+	
+	MPI_Request red_reqs[2][4];
+	MPI_Request black_reqs[2][4];
+	int mpi_black_test_flags[4] = {0,0,0,0};
+	int mpi_red_test_flags[4] = {0,0,0,0};
+
+	//initialise the sendings and receptions for the red array
+ 	send_recv_init_rb(ro_u_pointer,up,down,left,right,new_comm,ro_col_type,&red_reqs[0][0],tag_array_ro_u_red,block_size);
+ 	
+ 	//initialise the sendings and receptions for the black array
+ 	send_recv_init_rb(ro_u_pointer+(block_size*(columns+2)),up,down,left,right,new_comm,ro_col_type,&black_reqs[0][0],tag_array_ro_u_black,block_size);
+    
+    MPI_Barrier(new_comm);
+ 	
+ 	double start_time = MPI_Wtime();
+
       do {
-//	    timestamp ts_start;
-	 //   fprintf(stderr,"MESA STI DO WHILE!!!!!!!!!!\n");
+
+        metr=metr+1;
+		sqrerror = 0.0;
+		tsqrerror = 0.0;
 
 
-			/*if(taskid==3){
-				fprintf(stderr, "EDW?????????????????\n" );
-			}*/
-          metr=metr+1;
-//printf("Iteration: %ld, thread %d\n", metr, omp_get_thread_num());
-//          ts_start = getTimestamp();
-//		  max = fabs( ( 1. - w1[1][1] )*u[1][1] + w1[1][1]*( l[1][1]*u[1-1][1] + r[1][1]*u[1+1][1] + b[1][1]*u[1][1-1] + t[1][1]*u[1][1+1] ) );
-		  sqrerror = 0.0;//fabs( ( 1. - w.get(1, 1) )*u.get(1, 1) + w.get(1, 1)*( l.get(1, 1)*u.get(1-1, 1) + r.get(1, 1)*u.get(1+1, 1) + b.get(1, 1)*u.get(1, 1-1) + t.get(1, 1)*u.get(1, 1+1) ) );
-		
-
-		double tsqrerror = 0.0;
-        
-		double* ro_u_pointer;
-
-		
-		ro_u_pointer = ro_u.get_pointer();
-		
-		
-		MPI_Request red_reqs[2][4];
-		MPI_Request black_reqs[2][4];
+		MPI_Startall(4, &black_reqs[0][0]);	//start the sendings of black borders
+		MPI_Startall(4, &black_reqs[1][0]);	//start the receptions of black borders
 
 
-
-
-#pragma omp barrier
-		if(k==1){
-			calcSegment<0>(1, columns, 1, block_size-1, tsqrerror,block_size,taskid,metr);
-		}
-	MPI_Barrier(new_comm);	
-	send_recv_init_rb(ro_u_pointer,up,down,left,right,new_comm,ro_col_type,&red_reqs[0][0],tag_array_ro_u_red,block_size);
-
-
-	MPI_Start(&red_reqs[0][0]);
-	MPI_Start(&red_reqs[0][1]);
-	MPI_Start(&red_reqs[0][2]);
-	MPI_Start(&red_reqs[0][3]);
-	MPI_Start(&red_reqs[1][0]);
-	MPI_Start(&red_reqs[1][1]);
-	MPI_Start(&red_reqs[1][2]);
-	MPI_Start(&red_reqs[1][3]);
-
-
-	
-
-	MPI_Wait(&red_reqs[0][0],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[0][1],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[0][2],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[0][3],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[1][0],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[1][1],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[1][2],MPI_STATUSES_IGNORE);
-	MPI_Wait(&red_reqs[1][3],MPI_STATUSES_IGNORE);
-
-	MPI_Barrier(new_comm);
-
-#pragma omp barrier
-		if(k==1){
-			calcSegment<1>(1, columns, 1, block_size-1, tsqrerror,block_size,taskid,metr);
+		if(no_error == 1){
+			
+			temp_start_inner_block_time  = MPI_Wtime();
+			
+			//calculate the internal values of the red array
+			calcSegment2<0>(2, columns, 2, block_size-1, tsqrerror,block_size,taskid,metr);	
+			
+			temp_end_inner_block_time = MPI_Wtime();
+			inner_block_time += temp_end_inner_block_time - temp_start_inner_block_time;
 		}
 
-/*		for(i=start_pos_y; i<end_pos_y; i++){
-		  for(j=start_pos_x; j<end_pos_x; j++){
-            if ( (i+j)%2 != 0 ) {
-				u.set(i, j, ( 1. - w.get(i, j) )*u.get(i, j) + w.get(i, j)*( l.get(i, j)*u.get(i-1, j) + r.get(i, j)*u.get(i+1, j) + b.get(i, j)*u.get(i, j-1) + t.get(i, j)*u.get(i, j+1) ) );
-				double max1 = fabs(u.get(i, j));
-              if( tmax<max1 ) tmax = max1;
-            }
-		  }
-		}*/
-	MPI_Barrier(new_comm);
-	send_recv_init_rb(ro_u_pointer+(block_size*(columns+2)),up,down,left,right,new_comm,ro_col_type,&black_reqs[0][0],tag_array_ro_u_black,block_size);
+		mpi_black_test_flags[0] = 0;
+		mpi_black_test_flags[1] = 0;
+		mpi_black_test_flags[2] = 0;
+		mpi_black_test_flags[3] = 0;
+
+			//check if all of the halo points have been received 
+			while(!mpi_black_test_flags[0] || !mpi_black_test_flags[1] || !mpi_black_test_flags[2] || !mpi_black_test_flags[3]){
+				for(int g = 0; g < 4; g++){
+					if(!mpi_black_test_flags[g]){
+						MPI_Test(&black_reqs[1][g], &mpi_black_test_flags[g], MPI_STATUSES_IGNORE);
+						if(mpi_black_test_flags[g]==1 && no_error == 1){
+							if(g == 0){
+								//calculate new values of first row of the red array
+								calcSegment2<0>(1, columns+1, 1, 2, tsqrerror, block_size, taskid, metr);
+							}
+							else if(g == 1){
+								//calculate new values of last row of the red array
+								calcSegment2<0>(1, columns+1, block_size-2, block_size-1, tsqrerror, block_size, taskid, metr);
+							}
+							else if(g == 2){
+								//calculate new values of first column of the red array
+								calcSegment2<0>(1, 2, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+							}
+							else{
+								//calculate new values of last column of the red array
+								calcSegment2<0>(columns, columns+1, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+							}
+						}
+					}
+				}
+			}
+		
+
+	/*	MPI_Waitall(4, &black_reqs[1][0], MPI_STATUSES_IGNORE);	//wait for the receptions of black borders to complete
+
+		if(no_error == 1){	//calculate borders of red
+			
+
+			//calculate new values of first row of the red array
+			calcSegment2<0>(1, columns+1, 1, 2, tsqrerror, block_size, taskid, metr);	
+
+			//calculate new values of last row of the red array
+			calcSegment2<0>(1, columns+1, block_size-2, block_size-1, tsqrerror, block_size, taskid, metr);
+
+			//calculate new values of first column of the red array
+			calcSegment2<0>(1, 2, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+
+			//calculate new values of last column of the red array
+			calcSegment2<0>(columns, columns+1, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+
+		}
+
+*/
+
+		MPI_Startall(4, &red_reqs[0][0]);	//start the sendings of red borders
+		MPI_Startall(4, &red_reqs[1][0]);	//start the receptions of black borders
 
 
-	MPI_Start(&black_reqs[0][0]);
-	MPI_Start(&black_reqs[0][1]);
-	MPI_Start(&black_reqs[0][2]);
-	MPI_Start(&black_reqs[0][3]);
-	MPI_Start(&black_reqs[1][0]);
-	MPI_Start(&black_reqs[1][1]);
-	MPI_Start(&black_reqs[1][2]);
-	MPI_Start(&black_reqs[1][3]);
+		if(no_error == 1){
+			
+			temp_start_inner_block_time = MPI_Wtime();
+			
+			//calculate the internal values of the black array 
+			calcSegment2<1>(2, columns, 2, block_size-1, tsqrerror,block_size,taskid,metr);
+			
+			temp_end_inner_block_time = MPI_Wtime();
+			inner_block_time += temp_end_inner_block_time - temp_start_inner_block_time;
+		}
+
+		mpi_red_test_flags[0] = 0;
+		mpi_red_test_flags[1] = 0;
+		mpi_red_test_flags[2] = 0;
+		mpi_red_test_flags[3] = 0;
+
+		
+			while(!mpi_red_test_flags[0] || !mpi_red_test_flags[1] || !mpi_red_test_flags[2] || !mpi_red_test_flags[3]){
+				for(int g = 0; g < 4; g++){
+					if(!mpi_red_test_flags[g]){
+						MPI_Test(&red_reqs[1][g], &mpi_red_test_flags[g], MPI_STATUSES_IGNORE);
+						if(mpi_red_test_flags[g]==1 && no_error == 1){
+							if(g == 0){
+								//calculate new values of first row of the black array
+								calcSegment2<1>(1, columns+1, 1, 2, tsqrerror, block_size, taskid, metr);
+							}
+							else if(g == 1){
+								//calculate new values of last row of the black array
+								calcSegment2<1>(1, columns+1, block_size-2, block_size-1, tsqrerror, block_size, taskid, metr);
+							}
+							else if(g == 2){
+								//calculate new values of first column of the black array
+								calcSegment2<1>(1, 2, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+							}
+							else{
+								//calculate new values of last column of the black array
+								calcSegment2<1>(columns, columns+1, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+							}
+						}
+					}
+				}
+			}
+		
 
 
-	
-
-	MPI_Wait(&black_reqs[0][0],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[0][1],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[0][2],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[0][3],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[1][0],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[1][1],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[1][2],MPI_STATUSES_IGNORE);
-	MPI_Wait(&black_reqs[1][3],MPI_STATUSES_IGNORE);
-
-	
-
-	MPI_Barrier(new_comm);
-
-//printf("\n%d. max=%4f\n", omp_get_thread_num(), tmax);
-//			printf("final max set %f\n", tmax);
-          	if(CHECK_SQRERROR){
-				sqrerror += tsqrerror;
-          	}
-		  
+	/*	MPI_Waitall(4, &red_reqs[1][0], MPI_STATUSES_IGNORE);	//wait for the receptions of red array to complete
 
 
-			//printf("\nit=%4d max=%4f\n", metr, max);
+		if(no_error == 1){	//calculate borders of black
+
+			//calculate new values of first row of the black array
+			calcSegment2<1>(1, columns+1, 1, 2, tsqrerror, block_size, taskid, metr);	
+
+			//calculate new values of last row of the black array
+			calcSegment2<1>(1, columns+1, block_size-2, block_size-1, tsqrerror, block_size, taskid, metr);
+
+			//calculate new values of first column of the black array
+			calcSegment2<1>(1, 2, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+
+			//calculate new values of last column of the black array
+			calcSegment2<1>(columns, columns+1, 1, block_size-1, tsqrerror, block_size, taskid, metr);
+		}
+*/
+
 		if(CHECK_SQRERROR){
-	        if(k==1){ //no error
-	          if (sqrerror <= e1){
-	          	fprintf(stderr, "ERRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRRRRRRRRRRR\n" );
-	            k=0;
+
+			sqrerror += tsqrerror;
+
+	        if(no_error==1){ //no error
+	          if (sqrerror <= e1){	//sygklisi
+	            no_error=0;
 	           }
 	          else {
-	            if (isnan(sqrerror) || sqrerror >= 5.0e+8){
-	              k=2;
+	            if (isnan(sqrerror) || sqrerror >= 5.0e+8){	//apoklisi
+	              no_error=2;
 	            }
 	            else
-	              k=1;
+	              no_error=1;
 	          }
 	        }
 	     }
-//          printf("(%f secs)\n", getElapsedtime(ts_start)/1000.0);
-
-
-
-//printf("i'm thread %d with k=%d and metr=%d of %d\n", omp_get_thread_num(), k, metr, maxiter);
-		int local_error;
 
 		error_sum = 0;
 
-		if(it_counter==ERROR_CHECK_ITERS){
+		it_counter++;
+
+
+		if(it_counter==ERROR_CHECK_ITERS && CHECK_SQRERROR == 1){
 			it_counter=0;
 
-			if(k==1){ 		//no error
+			if(no_error==1){ 		//inform others processes that this proccess must not stop yet
 				local_error=0;
 				MPI_Allreduce(&local_error, &error_sum, 1, MPI_INT, MPI_SUM, new_comm);
 			}
 
-			else{
+			else{					//inform others processes that this proccess must stop
 				local_error=1;
 				MPI_Allreduce(&local_error, &error_sum, 1, MPI_INT, MPI_SUM, new_comm);
 			}
@@ -1409,24 +1354,19 @@ int it_counter=0;
 			
 		}
 
+		MPI_Waitall(4, &black_reqs[0][0], MPI_STATUSES_IGNORE);	//wait for the sendings of black array to complete
+		MPI_Waitall(4, &red_reqs[0][0], MPI_STATUSES_IGNORE);	//wait for the sendings of red array to complete
 		
 
-		it_counter++;
-		
-		//end of omp master
-/*#pragma omp_master			//////////debug
-		{
-			if(taskid==3){
-				fprintf(stderr, "EFTASA EDW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n" );
-			}
-		}*/
 
       } while ((error_sum!=numtasks) && (metr<=maxiter));
 
+      	double end_time = MPI_Wtime();
 
+      	double do_while_time = end_time-start_time;
 	
-	
-	 //END OF THREADSSSSSSSS
+	fprintf(stderr, "\n do while took %f seconds \n", do_while_time);
+	fprintf(stderr, "total inner block time = %f\n", inner_block_time);	 
 		
 	#ifdef _PRECALC_
 		ro_ffh.copyto(arr_ffh);
@@ -1438,31 +1378,14 @@ int it_counter=0;
 		ro_b.copyto(arr_b);
 	#endif
 		ro_w.copyto(arr_w);
-	fprintf(stderr,"EFTASA TI EGINEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n");
-	double calc_time = getElapsedtime(ts_start)/1000.0f;
+	
+	
 #ifdef _PRECALC_
 	const double ACCESSES_PER_ELEMENT = 6.;
 #else
 	const double ACCESSES_PER_ELEMENT = 8.;
 #endif
-	printf(" %f seconds (%f milliseconds/iteration, %.2fGB/sec)\n", calc_time, 1000.0f*calc_time/metr, (ACCESSES_PER_ELEMENT*block_size*block_size*sizeof(double)*metr/calc_time)/(1024.*1024.*1024.));
-
-	// Inverse Reordering
-	ts_start = getTimestamp();
-/*	ro_u.copyto(arr_u);
-#ifdef _PRECALC_
-	ro_ffh.copyto(arr_ffh);
-	ro_ggh.copyto(arr_ggh);
-#else
-	ro_l.copyto(arr_l);
-	ro_r.copyto(arr_r);
-	ro_t.copyto(arr_t);
-	ro_b.copyto(arr_b);
-#endif
-	ro_w.copyto(arr_w);*/
-	double reorderInvTime = getElapsedtime(ts_start)/1000.0f;
-	printf(" %f reordering overhead (%f forward reordering + %f inverse reordering)\n", reorderFwTime+reorderInvTime, reorderFwTime, reorderInvTime);
-	printf(" %f seconds total time\n", reorderFwTime+reorderInvTime+calc_time);
+	
 
 #ifdef MODIFIED_SOR
 	const char cMethod[] = "R/B LMSOR (CPU)";
@@ -1474,9 +1397,8 @@ int it_counter=0;
 #else
 	const char cKernel[] = "Sequential";
 #endif
-	printf("___\nEXCEL friendly line follows:\n%d;%d;%.1f;%d;(%ld,%ld);%s;%s;%ld;%f;%f;%d\n___\n", block_size, epilogi, re, gperiptosi, cReals, cImags, cMethod, cKernel, metr, calc_time, reorderFwTime+reorderInvTime+calc_time, k!=2);
 
-    if (k==2) {
+    if (no_error==2) {
       printf("oxi sygklisi ****");
       printf("\n periptosi : %3d\n", periptosi);
       fprintf(arxeio," oxi sygklisi  ****");
@@ -1487,60 +1409,7 @@ int it_counter=0;
       printf("\n periptosi : %3d\n", periptosi);
     }
 
-    /////////////////////////////////1o fprintf//////////////////////////////
    
- /*  if(taskid != 0){
-   		MPI_Request mpi_req;
-   		double *arr_u_pointer = arr_u._get_data();
-   		
-   		MPI_Isend(arr_u_pointer+block_size+1,1,inner_block,0,taskid,new_comm,&mpi_req);
-   		MPI_Wait(&mpi_req,MPI_STATUSES_IGNORE);
-   		//fprintf(stderr, "eimai o taskid=%d kai TON ESTEILAAAAA\n",taskid );
-   }
-
-  // else{
-   		MPI_Request* array_of_reqs = new MPI_Request[numtasks-1];
-     	double *full_array = new double[NMAX*NMAX];
-
-     	//int blocks_per_line  = sqrt(numtasks);
-     	int ll=0;
-     	int cc=0;
-     	for(int iii = 1; iii < numtasks; iii++){
-     		cc++;
- 			if(cc*(block_size-2) < NMAX){
- 				MPI_Irecv(full_array+(ll*NMAX)+(cc*(block_size-2)),1,block_type,iii,iii,new_comm,&(array_of_reqs[iii-1]));
- 				MPI_Wait(&(array_of_reqs[iii-1]),MPI_STATUSES_IGNORE);
- 			//	fprintf(stderr, "eimai o taskid=%d kai OUTE KANNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\n",taskid );
-
- 			}
- 			else{
- 			//	fprintf(stderr, "EFTASA KAI DWWWWWWWWWWWW\n" );
- 				if(ll+(block_size-2)  <  NMAX){
- 					ll+=(block_size-2);
- 					cc=0;
- 					MPI_Irecv(full_array+(ll*NMAX)+(cc*(block_size-2)),1,block_type,iii,iii,new_comm,&(array_of_reqs[iii-1]));
- 					MPI_Wait(&(array_of_reqs[iii-1]),MPI_STATUSES_IGNORE);
- 					//fprintf(stderr, "????????????????????????????????????????????????????????\n");
- 				}
- 				else{
- 					break;
- 				}
- 			}
-     		
-     		
-
-     	}
-
-     	for(int iii = 0; iii < block_size-2; iii++){
-     			for(int jjj = 0; jjj < block_size-2; jjj++){
-     				*(full_array+(iii*NMAX)+jjj) = arr_u.get(iii+1,jjj+1);
-     			}
-     		}*/
-
-     	/*fprintf(stderr, "arr_u 200 267 = %f\n",arr_u.get(200,267) );
-     	fprintf(stderr, "full array 199 266=%f\n",*(full_array+(199*NMAX)+266)  );
-
-     	fprintf(stderr, "full array block_size-1 9+block_size-2 = %f\n", *(full_array+((block_size-1)*NMAX)+9) );*/
 
      	if (ektyp1==1) {
 	      printf("RANGE_w1 = %5.4lf - %5.4lf \t RANGE_w2 = %5.4lf - %5.4lf\n", min_w1,max_w1,min_w2,max_w2);
@@ -1558,13 +1427,7 @@ int it_counter=0;
 	    }
 
 	    if (ektyp2==1) {
-	  /*    for(j=NMAX-1; j>=0; j--) {
-	        for( i=0; i<=NMAX-1; i++) {
-	//          fprintf(arxeio,"  %5.4e",u1[i][j]);
-				fprintf(arxeio,"  %5.4e",*(full_array+(i*NMAX)+j));
-	        }
-	        fprintf(arxeio,"\n");
-	      }*/
+	 
 	      fprintf(arxeio," NITER = %6ld \t RANGE_w1 = %5.4lf - %5.4lf \t RANGE_w2 = %5.4lf - %5.4lf \n",
 	              metr,min_w1,max_w1,min_w2,max_w2);
 	      fprintf(arxeio," periptosi:  %3d   RANGE_m_low =  %5.4lf - %5.4lf \t RANGE_m_up= %5.4lf - %5.4lf \n",
@@ -1574,12 +1437,7 @@ int it_counter=0;
 
 		fclose(arxeio);
   	
-  // }
-
-   MPI_Barrier(new_comm);
-
-   
-
+  
     
   if( argc < 2 )
     mypause();

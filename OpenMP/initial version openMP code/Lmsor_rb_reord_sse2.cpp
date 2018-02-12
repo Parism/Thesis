@@ -9,7 +9,7 @@
 #include <string.h>
 #include <limits.h>
 #include <float.h>
-#include <timestamp.h>
+#include "timestamp.h"
 #ifdef _OPENMP
 #include <omp.h>
 #else
@@ -257,11 +257,8 @@ inline void calcSegment(const int bound_s_x, const int bound_e_x, const int boun
 //	_mm_sfence();
 
 #else
-	int i,j=0;
-#	pragma omp parallel for num_threads(2) schedule(dynamic,1) private(i,j)
-	for(i=bound_s_y; i<bound_e_y; i++){
-//#		pragma omp for
-		for(j=bound_s_x; j<bound_e_x; j++){
+	for(int i=bound_s_y; i<bound_e_y; i++){
+		for(int j=bound_s_x; j<bound_e_x; j++){
 			if ( (i+j)%2 == phase ) {
 				double old_val = ro_u.get(i, j);
 #ifdef _PRECALC_
@@ -308,7 +305,7 @@ void firstTouch(void){
 		int bs_x=n/sx, bs_y=n/sy, lastoffset_x=n%sx, lastoffset_y=n%sy;
 		int start_pos_x = 1+bs_x * (omp_get_thread_num()%sx), start_pos_y=1+bs_y * (omp_get_thread_num()/sx), end_pos_x=start_pos_x+bs_x+(omp_get_thread_num()%sx==sx-1?lastoffset_x:0), end_pos_y=start_pos_y+bs_y+(omp_get_thread_num()/sx==sy-1?lastoffset_y:0);
 
-		//for(int i=start_pos_y; i<end_pos_y; i++)
+		for(int i=start_pos_y; i<end_pos_y; i++)
 		for(int i=start_pos_y; i<end_pos_y; i++)
 			for(int j=start_pos_x; j<end_pos_x; j++){
 				arr_u.set(i, j, 0.0);
@@ -664,9 +661,9 @@ int main(int argc, char* argv[]) {
 	double reorderFwTime = getElapsedtime(ts_start)/1000.0f;
 
 	ts_start = getTimestamp();
-//#pragma omp parallel shared(sqrerror,metr,k) private(i)
-   // {
-//#pragma omp master
+#pragma omp parallel shared(sqrerror,metr,k) private(i)
+    {
+#pragma omp master
 #ifdef _OPENMP
       printf("Using block partitioning (total threads %d)\n", omp_get_num_threads());
 #endif
@@ -694,19 +691,19 @@ int main(int argc, char* argv[]) {
 #endif*/
       do {
 //	    timestamp ts_start;
-//#pragma omp barrier
-//#pragma omp master
-		//{
+#pragma omp barrier
+#pragma omp master
+		{
           metr=metr+1;
 //printf("Iteration: %ld, thread %d\n", metr, omp_get_thread_num());
 //          ts_start = getTimestamp();
 //		  max = fabs( ( 1. - w1[1][1] )*u[1][1] + w1[1][1]*( l[1][1]*u[1-1][1] + r[1][1]*u[1+1][1] + b[1][1]*u[1][1-1] + t[1][1]*u[1][1+1] ) );
 		  sqrerror = 0.0;//fabs( ( 1. - w.get(1, 1) )*u.get(1, 1) + w.get(1, 1)*( l.get(1, 1)*u.get(1-1, 1) + r.get(1, 1)*u.get(1+1, 1) + b.get(1, 1)*u.get(1, 1-1) + t.get(1, 1)*u.get(1, 1+1) ) );
-		//}
-//#pragma omp barrier
+		}
+#pragma omp barrier
 		double tsqrerror = 0.0;
         /* red/black ordering */
-		calcSegment<0>(0, NMAX, 0, NMAX, tsqrerror);
+		calcSegment<0>(start_pos_x, end_pos_x, start_pos_y, end_pos_y, tsqrerror);
 /*		for(i=start_pos_y; i<end_pos_y; i++){
 		  for(j=start_pos_x; j<end_pos_x; j++){
             if ( (i+j)%2 == 0 ) {
@@ -716,8 +713,8 @@ int main(int argc, char* argv[]) {
             }
 		  }
 		}*/
-//#pragma omp barrier
-		calcSegment<1>(0, NMAX, 0, NMAX, tsqrerror);
+#pragma omp barrier
+		calcSegment<1>(start_pos_x, end_pos_x, start_pos_y, end_pos_y, tsqrerror);
 /*		for(i=start_pos_y; i<end_pos_y; i++){
 		  for(j=start_pos_x; j<end_pos_x; j++){
             if ( (i+j)%2 != 0 ) {
@@ -727,15 +724,15 @@ int main(int argc, char* argv[]) {
             }
 		  }
 		}*/
-//#pragma omp critical
-         // {
+#pragma omp critical
+          {
 //printf("\n%d. max=%4f\n", omp_get_thread_num(), tmax);
 //			printf("final max set %f\n", tmax);
 			sqrerror += tsqrerror;
-		 // }
-//#pragma omp barrier
-//#pragma omp master
-		//{
+		  }
+#pragma omp barrier
+#pragma omp master
+		{
 //printf("\nit=%4d max=%4f\n", metr, max);
           if (sqrerror <= e1)
             k=0;
@@ -746,12 +743,12 @@ int main(int argc, char* argv[]) {
               k=1;
           }
 //          printf("(%f secs)\n", getElapsedtime(ts_start)/1000.0);
-		//}
-//#pragma omp barrier
+		}
+#pragma omp barrier
 //printf("i'm thread %d with k=%d and metr=%d of %d\n", omp_get_thread_num(), k, metr, maxiter);
       } while ((k==1) && (metr<=maxiter));
 //printf("end of %d\n", omp_get_thread_num());
-	//}
+	}
 	double calc_time = getElapsedtime(ts_start)/1000.0f;
 #ifdef _PRECALC_
 	const double ACCESSES_PER_ELEMENT = 6.;

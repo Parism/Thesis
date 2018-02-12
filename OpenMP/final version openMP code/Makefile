@@ -26,17 +26,17 @@ lmsor_omp: lmsor_rb_omp.o
 lmsor_omp_sse2: lmsor_rb_omp_sse2.o
 	${CC} ${LFLAGS} -o $@ lmsor_rb_omp_sse2.o ${LIBS}
 
-lmsor_rb_seq.o: Lmsor_rb_reord_sse2.cpp
-	${CC} -c ${FLAGS_SEQ} -DMODIFIED_SOR Lmsor_rb_reord_sse2.cpp -o $@
+lmsor_rb_seq.o: parallel_for.cpp
+	${CC} -c ${FLAGS_SEQ} -DMODIFIED_SOR parallel_for.cpp -o $@
 
-lmsor_rb_seq_sse2.o: Lmsor_rb_reord_sse2.cpp
-	${CC} -c ${FLAGS_SEQ} -DMODIFIED_SOR -D_INTRINSIC_SSE2_ Lmsor_rb_reord_sse2.cpp -o $@
+lmsor_rb_seq_sse2.o: parallel_for.cpp
+	${CC} -c ${FLAGS_SEQ} -DMODIFIED_SOR -D_INTRINSIC_SSE2_ parallel_for.cpp -o $@
 
-lmsor_rb_omp.o: Lmsor_rb_reord_sse2.cpp
-	${CC} -c ${FLAGS} -DMODIFIED_SOR -DBLOCK_PARTITIONING Lmsor_rb_reord_sse2.cpp -o $@
+lmsor_rb_omp.o: parallel_for.cpp
+	${CC} -c ${FLAGS} -DMODIFIED_SOR -DBLOCK_PARTITIONING parallel_for.cpp -o $@
 
-lmsor_rb_omp_sse2.o: Lmsor_rb_reord_sse2.cpp
-	${CC} -c ${FLAGS} -DMODIFIED_SOR -DBLOCK_PARTITIONING -D_INTRINSIC_SSE2_ Lmsor_rb_reord_sse2.cpp -o $@
+lmsor_rb_omp_sse2.o: parallel_for.cpp
+	${CC} -c ${FLAGS} -DMODIFIED_SOR -DBLOCK_PARTITIONING -D_INTRINSIC_SSE2_ parallel_for.cpp -o $@
 
 clean:
 	\rm -f $(CLEAN_FILES)
