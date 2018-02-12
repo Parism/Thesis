@@ -1,0 +1,27 @@
+#!/bin/bash
+#-----------------------------------------------------------------
+# Omp job , requesting 4 cores , 50000 MB of memory per job
+#-----------------------------------------------------------------
+#SBATCH --job-name=lmsor_omp_hybrid# Job name
+#SBATCH --output=lmsor_omp_300its_100procs_thin_5nodes.%j.out # Stdout (%j expands to jobId)
+#SBATCH --error=lmsor_omp_100000.%j.err # Stderr (%j expands to jobId)
+#SBATCH --ntasks=100 # Total number of tasks
+#SBATCH --nodes=5 # Total number of nodes requested
+#SBATCH --ntasks-per-node=20 # Tasks per node
+#SBATCH --cpus-per-task=1 # Threads per task
+#SBATCH --mem=30000 # Memory per job in MB
+#SBATCH -t 00:20:00 # Run time (hh:mm:ss) - (max 48h)
+#SBATCH -A pa170104 # Accounting project
+
+
+# Load any necessary modules
+
+module load gnu
+module load intel
+module load intelmpi
+export I_MPI_FABRICS=shm:dapl
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+
+# Launch the executable
+srun ./lmsor_omp_hybrid apotelesmata 300 6 10.0 1 1 1
