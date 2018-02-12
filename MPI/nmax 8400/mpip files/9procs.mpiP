@@ -1,0 +1,1279 @@
+@ mpiP
+@ Command : /work/pa001/parsysdi/mpi_corrections/nmax8400/with_mpi_test/./lmsor_omp_hybrid apotelesmata 300 6 10.0 1 1 1 
+@ Version                  : 3.4.1
+@ MPIP Build date          : Sep  7 2015, 16:33:51
+@ Start time               : 2017 11 20 15:53:57
+@ Stop time                : 2017 11 20 15:54:24
+@ Timer Used               : PMPI_Wtime
+@ MPIP env var             : [null]
+@ Collector Rank           : 0
+@ Collector PID            : 30202
+@ Final Output Dir         : .
+@ Report generation        : Collective
+@ MPI Task Assignment      : 0 node137
+@ MPI Task Assignment      : 1 node137
+@ MPI Task Assignment      : 2 node137
+@ MPI Task Assignment      : 3 node137
+@ MPI Task Assignment      : 4 node137
+@ MPI Task Assignment      : 5 node137
+@ MPI Task Assignment      : 6 node137
+@ MPI Task Assignment      : 7 node137
+@ MPI Task Assignment      : 8 node137
+
+---------------------------------------------------------------------------
+@--- MPI Time (seconds) ---------------------------------------------------
+---------------------------------------------------------------------------
+Task    AppTime    MPITime     MPI%
+   0       27.8      0.367     1.32
+   1       27.8       1.11     4.00
+   2       27.8      0.227     0.82
+   3       27.8       1.18     4.24
+   4       27.8      0.137     0.49
+   5       27.8       1.17     4.20
+   6       27.8       1.17     4.22
+   7       27.8      0.283     1.02
+   8       27.8      0.227     0.82
+   *        250       5.87     2.35
+---------------------------------------------------------------------------
+@--- Callsites: 99 --------------------------------------------------------
+---------------------------------------------------------------------------
+ ID Lev File/Address            Line Parent_Funct                        MPI_Call
+  1   0 Lmsor_rb_reord_mpi.cpp  1040 main                                Wait
+  2   0 Lmsor_rb_reord_mpi.cpp   975 main                                Start
+  3   0 Lmsor_rb_reord_mpi.cpp  1141 main                                Wait
+  4   0 Lmsor_rb_reord_mpi.cpp   204 _Z17send_recv_init_rbPdiiiiiiPiS0_i Recv_init
+  5   0 Lmsor_rb_reord_mpi.cpp  1103 main                                Wait
+  6   0 Lmsor_rb_reord_mpi.cpp  1140 main                                Wait
+  7   0 Lmsor_rb_reord_mpi.cpp   974 main                                Start
+  8   0 Lmsor_rb_reord_mpi.cpp  1039 main                                Wait
+  9   0 Lmsor_rb_reord_mpi.cpp  1102 main                                Wait
+ 10   0 Lmsor_rb_reord_mpi.cpp   182 _Z14send_recv_initPdiiiiiiPiS0_i    Recv_init
+ 11   0 Lmsor_rb_reord_mpi.cpp   973 main                                Start
+ 12   0 Lmsor_rb_reord_mpi.cpp  1358 main                                Waitall
+ 13   0 Lmsor_rb_reord_mpi.cpp  1144 main                                Wait
+ 14   0 Lmsor_rb_reord_mpi.cpp   180 _Z14send_recv_initPdiiiiiiPiS0_i    Send_init
+ 15   0 Lmsor_rb_reord_mpi.cpp  1105 main                                Wait
+ 16   0 Lmsor_rb_reord_mpi.cpp  1042 main                                Wait
+ 17   0 Lmsor_rb_reord_mpi.cpp  1357 main                                Waitall
+ 18   0 Lmsor_rb_reord_mpi.cpp   972 main                                Start
+ 19   0 Lmsor_rb_reord_mpi.cpp   857 main                                Cart_create
+ 20   0 Lmsor_rb_reord_mpi.cpp   202 _Z17send_recv_init_rbPdiiiiiiPiS0_i Send_init
+ 21   0 Lmsor_rb_reord_mpi.cpp  1142 main                                Wait
+ 22   0 Lmsor_rb_reord_mpi.cpp  1143 main                                Wait
+ 23   0 Lmsor_rb_reord_mpi.cpp  1041 main                                Wait
+ 24   0 Lmsor_rb_reord_mpi.cpp  1104 main                                Wait
+ 25   0 Lmsor_rb_reord_mpi.cpp  1182 main                                Startall
+ 26   0 Lmsor_rb_reord_mpi.cpp   971 main                                Start
+ 27   0 Lmsor_rb_reord_mpi.cpp  1037 main                                Wait
+ 28   0 Lmsor_rb_reord_mpi.cpp  1054 main                                Wait
+ 29   0 Lmsor_rb_reord_mpi.cpp   179 _Z14send_recv_initPdiiiiiiPiS0_i    Send_init
+ 30   0 Lmsor_rb_reord_mpi.cpp   970 main                                Start
+ 31   0 Lmsor_rb_reord_mpi.cpp  1053 main                                Wait
+ 32   0 Lmsor_rb_reord_mpi.cpp   201 _Z17send_recv_init_rbPdiiiiiiPiS0_i Send_init
+ 33   0 Lmsor_rb_reord_mpi.cpp  1139 main                                Wait
+ 34   0 Lmsor_rb_reord_mpi.cpp   969 main                                Start
+ 35   0 Lmsor_rb_reord_mpi.cpp  1205 main                                Test
+ 36   0 Lmsor_rb_reord_mpi.cpp   940 main                                Recv_init
+ 37   0 Lmsor_rb_reord_mpi.cpp  1133 main                                Start
+ 38   0 Lmsor_rb_reord_mpi.cpp  1101 main                                Wait
+ 39   0 Lmsor_rb_reord_mpi.cpp  1181 main                                Startall
+ 40   0 Lmsor_rb_reord_mpi.cpp  1168 main                                Recv_init
+ 41   0 Lmsor_rb_reord_mpi.cpp  1138 main                                Wait
+ 42   0 Lmsor_rb_reord_mpi.cpp  1131 main                                Start
+ 43   0 Lmsor_rb_reord_mpi.cpp  1032 main                                Start
+ 44   0 Lmsor_rb_reord_mpi.cpp  1100 main                                Wait
+ 45   0 Lmsor_rb_reord_mpi.cpp  1038 main                                Wait
+ 46   0 Lmsor_rb_reord_mpi.cpp   965 main                                Start
+ 47   0 Lmsor_rb_reord_mpi.cpp  1132 main                                Start
+ 48   0 Lmsor_rb_reord_mpi.cpp   184 _Z14send_recv_initPdiiiiiiPiS0_i    Recv_init
+ 49   0 Lmsor_rb_reord_mpi.cpp  1129 main                                Start
+ 50   0 Lmsor_rb_reord_mpi.cpp  1049 main                                Wait
+ 51   0 Lmsor_rb_reord_mpi.cpp   964 main                                Start
+ 52   0 Lmsor_rb_reord_mpi.cpp  1031 main                                Start
+ 53   0 Lmsor_rb_reord_mpi.cpp   178 _Z14send_recv_initPdiiiiiiPiS0_i    Send_init
+ 54   0 Lmsor_rb_reord_mpi.cpp  1130 main                                Start
+ 55   0 Lmsor_rb_reord_mpi.cpp  1048 main                                Wait
+ 56   0 Lmsor_rb_reord_mpi.cpp  1030 main                                Start
+ 57   0 Lmsor_rb_reord_mpi.cpp   962 main                                Start
+ 58   0 Lmsor_rb_reord_mpi.cpp  1351 main                                Allreduce
+ 59   0 Lmsor_rb_reord_mpi.cpp   911 main                                Cart_shift
+ 60   0 Lmsor_rb_reord_mpi.cpp   200 _Z17send_recv_init_rbPdiiiiiiPiS0_i Send_init
+ 61   0 Lmsor_rb_reord_mpi.cpp  1128 main                                Start
+ 62   0 Lmsor_rb_reord_mpi.cpp   963 main                                Start
+ 63   0 Lmsor_rb_reord_mpi.cpp   934 main                                Recv_init
+ 64   0 Lmsor_rb_reord_mpi.cpp   912 main                                Cart_shift
+ 65   0 Lmsor_rb_reord_mpi.cpp   961 main                                Start
+ 66   0 Lmsor_rb_reord_mpi.cpp   206 _Z17send_recv_init_rbPdiiiiiiPiS0_i Recv_init
+ 67   0 Lmsor_rb_reord_mpi.cpp  1029 main                                Start
+ 68   0 Lmsor_rb_reord_mpi.cpp  1051 main                                Wait
+ 69   0 Lmsor_rb_reord_mpi.cpp  1052 main                                Wait
+ 70   0 Lmsor_rb_reord_mpi.cpp  1127 main                                Start
+ 71   0 Lmsor_rb_reord_mpi.cpp  1028 main                                Start
+ 72   0 Lmsor_rb_reord_mpi.cpp  1050 main                                Wait
+ 73   0 Lmsor_rb_reord_mpi.cpp   177 _Z14send_recv_initPdiiiiiiPiS0_i    Send_init
+ 74   0 Lmsor_rb_reord_mpi.cpp  1126 main                                Start
+ 75   0 Lmsor_rb_reord_mpi.cpp  1107 main                                Wait
+ 76   0 Lmsor_rb_reord_mpi.cpp   845 main                                Type_commit
+ 77   0 Lmsor_rb_reord_mpi.cpp  1027 main                                Start
+ 78   0 Lmsor_rb_reord_mpi.cpp  1251 main                                Startall
+ 79   0 Lmsor_rb_reord_mpi.cpp   960 main                                Start
+ 80   0 Lmsor_rb_reord_mpi.cpp   183 _Z14send_recv_initPdiiiiiiPiS0_i    Recv_init
+ 81   0 Lmsor_rb_reord_mpi.cpp   939 main                                Recv_init
+ 82   0 Lmsor_rb_reord_mpi.cpp  1165 main                                Recv_init
+ 83   0 Lmsor_rb_reord_mpi.cpp  1250 main                                Startall
+ 84   0 Lmsor_rb_reord_mpi.cpp  1274 main                                Test
+ 85   0 Lmsor_rb_reord_mpi.cpp   959 main                                Start
+ 86   0 Lmsor_rb_reord_mpi.cpp  1043 main                                Wait
+ 87   0 Lmsor_rb_reord_mpi.cpp   846 main                                Type_commit
+ 88   0 Lmsor_rb_reord_mpi.cpp   199 _Z17send_recv_init_rbPdiiiiiiPiS0_i Send_init
+ 89   0 Lmsor_rb_reord_mpi.cpp  1145 main                                Wait
+ 90   0 Lmsor_rb_reord_mpi.cpp  1106 main                                Wait
+ 91   0 Lmsor_rb_reord_mpi.cpp   958 main                                Start
+ 92   0 Lmsor_rb_reord_mpi.cpp   952 main                                Recv_init
+ 93   0 Lmsor_rb_reord_mpi.cpp  1026 main                                Start
+ 94   0 Lmsor_rb_reord_mpi.cpp   976 main                                Start
+ 95   0 Lmsor_rb_reord_mpi.cpp  1044 main                                Wait
+ 96   0 Lmsor_rb_reord_mpi.cpp   205 _Z17send_recv_init_rbPdiiiiiiPiS0_i Recv_init
+ 97   0 Lmsor_rb_reord_mpi.cpp  1047 main                                Wait
+ 98   0 Lmsor_rb_reord_mpi.cpp  1170 main                                Barrier
+ 99   0 Lmsor_rb_reord_mpi.cpp  1025 main                                Start
+---------------------------------------------------------------------------
+@--- Aggregate Time (top twenty, descending, milliseconds) ----------------
+---------------------------------------------------------------------------
+Call                 Site       Time    App%    MPI%     COV
+Allreduce              58   3.21e+03    1.28   54.64    0.74
+Test                   35      2e+03    0.80   34.13    1.05
+Test                   84        245    0.10    4.18    0.30
+Startall               39        115    0.05    1.96    0.27
+Startall               83        107    0.04    1.83    0.24
+Cart_create            19       53.2    0.02    0.91    0.38
+Startall               78       26.4    0.01    0.45    0.49
+Startall               25       23.9    0.01    0.41    0.52
+Wait                   23       22.6    0.01    0.38    1.99
+Waitall                17       13.2    0.01    0.23    0.21
+Wait                   16       12.7    0.01    0.22    2.98
+Wait                   21       7.57    0.00    0.13    1.98
+Waitall                12       6.34    0.00    0.11    0.15
+Barrier                98        6.2    0.00    0.11    0.98
+Wait                   22       4.44    0.00    0.08    2.80
+Wait                   13       1.79    0.00    0.03    2.03
+Send_init              73       1.53    0.00    0.03    0.12
+Type_commit            76       1.01    0.00    0.02    0.29
+Wait                   86      0.894    0.00    0.02    1.57
+Start                  79      0.701    0.00    0.01    0.81
+---------------------------------------------------------------------------
+@--- Aggregate Sent Message Size (top twenty, descending, bytes) ----------
+---------------------------------------------------------------------------
+Call                 Site      Count      Total       Avrg  Sent%
+Allreduce              58        135        540          4 100.00
+---------------------------------------------------------------------------
+@--- Callsite Time statistics (all, milliseconds): 891 --------------------
+---------------------------------------------------------------------------
+Name              Site Rank  Count      Max     Mean      Min   App%   MPI%
+Allreduce           58    0     15     40.3     18.9     3.11   1.02  77.19
+Allreduce           58    1     15     41.6     39.5     29.7   2.13  53.43
+Allreduce           58    2     15     40.3     10.4     1.27   0.56  68.87
+Allreduce           58    3     15     41.4       40     39.3   2.16  50.95
+Allreduce           58    4     15    0.026   0.0117    0.009   0.00   0.13
+Allreduce           58    5     15     41.2     39.9     39.3   2.16  51.35
+Allreduce           58    6     15     54.6     46.4     40.4   2.50  59.32
+Allreduce           58    7     15     39.7     10.5     1.47   0.57  55.59
+Allreduce           58    8     15     29.1      8.1     1.34   0.44  53.43
+Allreduce           58    *    135     54.6     23.8    0.009   1.28  54.64
+
+Barrier             98    0      1      1.1      1.1      1.1   0.00   0.30
+Barrier             98    1      1    0.036    0.036    0.036   0.00   0.00
+Barrier             98    2      1    0.153    0.153    0.153   0.00   0.07
+Barrier             98    3      1    0.036    0.036    0.036   0.00   0.00
+Barrier             98    4      1     1.52     1.52     1.52   0.01   1.11
+Barrier             98    5      1     1.08     1.08     1.08   0.00   0.09
+Barrier             98    6      1    0.284    0.284    0.284   0.00   0.02
+Barrier             98    7      1    0.225    0.225    0.225   0.00   0.08
+Barrier             98    8      1     1.75     1.75     1.75   0.01   0.77
+Barrier             98    *      9     1.75    0.688    0.036   0.00   0.11
+
+Cart_create         19    0      1     0.11     0.11     0.11   0.00   0.03
+Cart_create         19    1      1     7.26     7.26     7.26   0.03   0.65
+Cart_create         19    2      1     6.02     6.02     6.02   0.02   2.65
+Cart_create         19    3      1     7.26     7.26     7.26   0.03   0.62
+Cart_create         19    4      1     7.25     7.25     7.25   0.03   5.29
+Cart_create         19    5      1     5.75     5.75     5.75   0.02   0.49
+Cart_create         19    6      1      6.2      6.2      6.2   0.02   0.53
+Cart_create         19    7      1     6.06     6.06     6.06   0.02   2.14
+Cart_create         19    8      1     7.25     7.25     7.25   0.03   3.19
+Cart_create         19    *      9     7.26     5.91     0.11   0.02   0.91
+
+Cart_shift          59    0      1    0.088    0.088    0.088   0.00   0.02
+Cart_shift          59    1      1    0.024    0.024    0.024   0.00   0.00
+Cart_shift          59    2      1    0.071    0.071    0.071   0.00   0.03
+Cart_shift          59    3      1    0.028    0.028    0.028   0.00   0.00
+Cart_shift          59    4      1    0.029    0.029    0.029   0.00   0.02
+Cart_shift          59    5      1    0.028    0.028    0.028   0.00   0.00
+Cart_shift          59    6      1    0.026    0.026    0.026   0.00   0.00
+Cart_shift          59    7      1    0.027    0.027    0.027   0.00   0.01
+Cart_shift          59    8      1    0.039    0.039    0.039   0.00   0.02
+Cart_shift          59    *      9    0.088     0.04    0.024   0.00   0.01
+
+Cart_shift          64    0      1    0.002    0.002    0.002   0.00   0.00
+Cart_shift          64    1      1    0.001    0.001    0.001   0.00   0.00
+Cart_shift          64    2      1    0.001    0.001    0.001   0.00   0.00
+Cart_shift          64    3      1    0.002    0.002    0.002   0.00   0.00
+Cart_shift          64    4      1    0.002    0.002    0.002   0.00   0.00
+Cart_shift          64    5      1    0.002    0.002    0.002   0.00   0.00
+Cart_shift          64    6      1    0.002    0.002    0.002   0.00   0.00
+Cart_shift          64    7      1    0.002    0.002    0.002   0.00   0.00
+Cart_shift          64    8      1    0.001    0.001    0.001   0.00   0.00
+Cart_shift          64    *      9    0.002  0.00167    0.001   0.00   0.00
+
+Recv_init            4    0      2    0.003   0.0025    0.002   0.00   0.00
+Recv_init            4    1      2    0.001    0.001    0.001   0.00   0.00
+Recv_init            4    2      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init            4    3      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init            4    4      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init            4    5      2    0.004    0.003    0.002   0.00   0.00
+Recv_init            4    6      2    0.003   0.0025    0.002   0.00   0.00
+Recv_init            4    7      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init            4    8      2    0.005    0.003    0.001   0.00   0.00
+Recv_init            4    *     18    0.005    0.002    0.001   0.00   0.00
+
+Recv_init           10    0      4    0.018   0.0055    0.001   0.00   0.01
+Recv_init           10    1      4    0.024  0.00675    0.001   0.00   0.00
+Recv_init           10    2      4    0.016  0.00475    0.001   0.00   0.01
+Recv_init           10    3      4    0.011   0.0035    0.001   0.00   0.00
+Recv_init           10    4      4     0.01  0.00325    0.001   0.00   0.01
+Recv_init           10    5      4     0.01  0.00325    0.001   0.00   0.00
+Recv_init           10    6      4    0.009    0.003    0.001   0.00   0.00
+Recv_init           10    7      4    0.009    0.003    0.001   0.00   0.00
+Recv_init           10    8      4    0.009    0.003    0.001   0.00   0.01
+Recv_init           10    *     36    0.024    0.004    0.001   0.00   0.00
+
+Recv_init           36    0      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    1      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    2      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    3      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    4      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    5      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           36    6      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    7      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    8      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           36    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Recv_init           40    0      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           40    1      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           40    2      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           40    3      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           40    4      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           40    5      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           40    6      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           40    7      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           40    8      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           40    *      9    0.002  0.00133    0.001   0.00   0.00
+
+Recv_init           48    0      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           48    1      4    0.001    0.001    0.001   0.00   0.00
+Recv_init           48    2      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           48    3      4    0.001    0.001    0.001   0.00   0.00
+Recv_init           48    4      4    0.003   0.0015    0.001   0.00   0.00
+Recv_init           48    5      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           48    6      4    0.001    0.001    0.001   0.00   0.00
+Recv_init           48    7      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           48    8      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           48    *     36    0.003  0.00119    0.001   0.00   0.00
+
+Recv_init           63    0      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           63    1      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           63    2      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           63    3      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           63    4      1    0.003    0.003    0.003   0.00   0.00
+Recv_init           63    5      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           63    6      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           63    7      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           63    8      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           63    *      9    0.003  0.00167    0.001   0.00   0.00
+
+Recv_init           66    0      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           66    1      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           66    2      2    0.001    0.001    0.001   0.00   0.00
+Recv_init           66    3      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           66    4      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           66    5      2    0.002    0.002    0.002   0.00   0.00
+Recv_init           66    6      2    0.002    0.002    0.002   0.00   0.00
+Recv_init           66    7      2    0.002    0.002    0.002   0.00   0.00
+Recv_init           66    8      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           66    *     18    0.002  0.00161    0.001   0.00   0.00
+
+Recv_init           80    0      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    1      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    2      4    0.003   0.0015    0.001   0.00   0.00
+Recv_init           80    3      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    4      4    0.002   0.0015    0.001   0.00   0.00
+Recv_init           80    5      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    6      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    7      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    8      4    0.002  0.00125    0.001   0.00   0.00
+Recv_init           80    *     36    0.003  0.00131    0.001   0.00   0.00
+
+Recv_init           81    0      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    1      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    2      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    3      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    4      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    5      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    6      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    7      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    8      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           81    *      9    0.001    0.001    0.001   0.00   0.00
+
+Recv_init           82    0      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           82    1      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           82    2      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           82    3      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           82    4      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           82    5      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           82    6      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           82    7      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           82    8      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           82    *      9    0.002  0.00156    0.001   0.00   0.00
+
+Recv_init           92    0      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    1      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    2      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    3      1    0.002    0.002    0.002   0.00   0.00
+Recv_init           92    4      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    5      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    6      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    7      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    8      1    0.001    0.001    0.001   0.00   0.00
+Recv_init           92    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Recv_init           96    0      2    0.001    0.001    0.001   0.00   0.00
+Recv_init           96    1      2    0.001    0.001    0.001   0.00   0.00
+Recv_init           96    2      2    0.001    0.001    0.001   0.00   0.00
+Recv_init           96    3      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           96    4      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           96    5      2    0.001    0.001    0.001   0.00   0.00
+Recv_init           96    6      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           96    7      2    0.002   0.0015    0.001   0.00   0.00
+Recv_init           96    8      2    0.001    0.001    0.001   0.00   0.00
+Recv_init           96    *     18    0.002  0.00122    0.001   0.00   0.00
+
+Send_init           14    0      4    0.002   0.0015    0.001   0.00   0.00
+Send_init           14    1      4    0.001    0.001    0.001   0.00   0.00
+Send_init           14    2      4    0.003   0.0015    0.001   0.00   0.00
+Send_init           14    3      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           14    4      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           14    5      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           14    6      4    0.001    0.001    0.001   0.00   0.00
+Send_init           14    7      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           14    8      4    0.003  0.00175    0.001   0.00   0.00
+Send_init           14    *     36    0.003  0.00131    0.001   0.00   0.00
+
+Send_init           20    0      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           20    1      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           20    2      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           20    3      2    0.001    0.001    0.001   0.00   0.00
+Send_init           20    4      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           20    5      2    0.002    0.002    0.002   0.00   0.00
+Send_init           20    6      2    0.002    0.002    0.002   0.00   0.00
+Send_init           20    7      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           20    8      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           20    *     18    0.002  0.00156    0.001   0.00   0.00
+
+Send_init           29    0      4    0.003   0.0015    0.001   0.00   0.00
+Send_init           29    1      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           29    2      4    0.001    0.001    0.001   0.00   0.00
+Send_init           29    3      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           29    4      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           29    5      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           29    6      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           29    7      4    0.001    0.001    0.001   0.00   0.00
+Send_init           29    8      4    0.003  0.00175    0.001   0.00   0.00
+Send_init           29    *     36    0.003  0.00128    0.001   0.00   0.00
+
+Send_init           32    0      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           32    1      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           32    2      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           32    3      2    0.001    0.001    0.001   0.00   0.00
+Send_init           32    4      2    0.002    0.002    0.002   0.00   0.00
+Send_init           32    5      2    0.002    0.002    0.002   0.00   0.00
+Send_init           32    6      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           32    7      2    0.002    0.002    0.002   0.00   0.00
+Send_init           32    8      2    0.002    0.002    0.002   0.00   0.00
+Send_init           32    *     18    0.002  0.00167    0.001   0.00   0.00
+
+Send_init           53    0      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           53    1      4    0.002   0.0015    0.001   0.00   0.00
+Send_init           53    2      4    0.002   0.0015    0.001   0.00   0.00
+Send_init           53    3      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           53    4      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           53    5      4    0.002   0.0015    0.001   0.00   0.00
+Send_init           53    6      4    0.002  0.00125    0.001   0.00   0.00
+Send_init           53    7      4    0.002  0.00175    0.001   0.00   0.00
+Send_init           53    8      4    0.003   0.0015    0.001   0.00   0.00
+Send_init           53    *     36    0.003  0.00142    0.001   0.00   0.00
+
+Send_init           60    0      2    0.002    0.002    0.002   0.00   0.00
+Send_init           60    1      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           60    2      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           60    3      2    0.002   0.0015    0.001   0.00   0.00
+Send_init           60    4      2    0.001    0.001    0.001   0.00   0.00
+Send_init           60    5      2    0.002    0.002    0.002   0.00   0.00
+Send_init           60    6      2    0.001    0.001    0.001   0.00   0.00
+Send_init           60    7      2    0.001    0.001    0.001   0.00   0.00
+Send_init           60    8      2    0.002    0.002    0.002   0.00   0.00
+Send_init           60    *     18    0.002   0.0015    0.001   0.00   0.00
+
+Send_init           73    0      4    0.171   0.0493    0.001   0.00   0.05
+Send_init           73    1      4    0.132   0.0365    0.001   0.00   0.01
+Send_init           73    2      4    0.188   0.0525    0.001   0.00   0.09
+Send_init           73    3      4    0.147   0.0405    0.001   0.00   0.01
+Send_init           73    4      4    0.146     0.04    0.001   0.00   0.12
+Send_init           73    5      4     0.16    0.044    0.001   0.00   0.02
+Send_init           73    6      4    0.139    0.039    0.001   0.00   0.01
+Send_init           73    7      4    0.142   0.0387    0.001   0.00   0.05
+Send_init           73    8      4    0.145   0.0415    0.001   0.00   0.07
+Send_init           73    *     36    0.188   0.0424    0.001   0.00   0.03
+
+Send_init           88    0      2    0.008   0.0045    0.001   0.00   0.00
+Send_init           88    1      2    0.004   0.0025    0.001   0.00   0.00
+Send_init           88    2      2    0.006    0.004    0.002   0.00   0.00
+Send_init           88    3      2    0.005   0.0035    0.002   0.00   0.00
+Send_init           88    4      2    0.009   0.0055    0.002   0.00   0.01
+Send_init           88    5      2    0.013   0.0075    0.002   0.00   0.00
+Send_init           88    6      2    0.008    0.005    0.002   0.00   0.00
+Send_init           88    7      2    0.006    0.004    0.002   0.00   0.00
+Send_init           88    8      2    0.023   0.0125    0.002   0.00   0.01
+Send_init           88    *     18    0.023  0.00544    0.001   0.00   0.00
+
+Start                2    0      1    0.001    0.001    0.001   0.00   0.00
+Start                2    1      1    0.001    0.001    0.001   0.00   0.00
+Start                2    2      1    0.001    0.001    0.001   0.00   0.00
+Start                2    3      1    0.001    0.001    0.001   0.00   0.00
+Start                2    4      1    0.001    0.001    0.001   0.00   0.00
+Start                2    5      1    0.001    0.001    0.001   0.00   0.00
+Start                2    6      1    0.001    0.001    0.001   0.00   0.00
+Start                2    7      1    0.001    0.001    0.001   0.00   0.00
+Start                2    8      1    0.001    0.001    0.001   0.00   0.00
+Start                2    *      9    0.001    0.001    0.001   0.00   0.00
+
+Start                7    0      1    0.002    0.002    0.002   0.00   0.00
+Start                7    1      1    0.001    0.001    0.001   0.00   0.00
+Start                7    2      1    0.001    0.001    0.001   0.00   0.00
+Start                7    3      1    0.001    0.001    0.001   0.00   0.00
+Start                7    4      1    0.001    0.001    0.001   0.00   0.00
+Start                7    5      1    0.001    0.001    0.001   0.00   0.00
+Start                7    6      1    0.001    0.001    0.001   0.00   0.00
+Start                7    7      1    0.001    0.001    0.001   0.00   0.00
+Start                7    8      1    0.001    0.001    0.001   0.00   0.00
+Start                7    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Start               11    0      1    0.002    0.002    0.002   0.00   0.00
+Start               11    1      1    0.002    0.002    0.002   0.00   0.00
+Start               11    2      1    0.001    0.001    0.001   0.00   0.00
+Start               11    3      1    0.002    0.002    0.002   0.00   0.00
+Start               11    4      1    0.001    0.001    0.001   0.00   0.00
+Start               11    5      1    0.001    0.001    0.001   0.00   0.00
+Start               11    6      1    0.002    0.002    0.002   0.00   0.00
+Start               11    7      1    0.002    0.002    0.002   0.00   0.00
+Start               11    8      1    0.001    0.001    0.001   0.00   0.00
+Start               11    *      9    0.002  0.00156    0.001   0.00   0.00
+
+Start               18    0      1    0.126    0.126    0.126   0.00   0.03
+Start               18    1      1    0.034    0.034    0.034   0.00   0.00
+Start               18    2      1    0.002    0.002    0.002   0.00   0.00
+Start               18    3      1    0.063    0.063    0.063   0.00   0.01
+Start               18    4      1    0.066    0.066    0.066   0.00   0.05
+Start               18    5      1    0.002    0.002    0.002   0.00   0.00
+Start               18    6      1    0.088    0.088    0.088   0.00   0.01
+Start               18    7      1    0.042    0.042    0.042   0.00   0.01
+Start               18    8      1    0.002    0.002    0.002   0.00   0.00
+Start               18    *      9    0.126   0.0472    0.002   0.00   0.01
+
+Start               26    0      1    0.001    0.001    0.001   0.00   0.00
+Start               26    1      1    0.074    0.074    0.074   0.00   0.01
+Start               26    2      1     0.12     0.12     0.12   0.00   0.05
+Start               26    3      1    0.001    0.001    0.001   0.00   0.00
+Start               26    4      1    0.127    0.127    0.127   0.00   0.09
+Start               26    5      1    0.065    0.065    0.065   0.00   0.01
+Start               26    6      1    0.001    0.001    0.001   0.00   0.00
+Start               26    7      1    0.078    0.078    0.078   0.00   0.03
+Start               26    8      1    0.136    0.136    0.136   0.00   0.06
+Start               26    *      9    0.136    0.067    0.001   0.00   0.01
+
+Start               30    0      1    0.031    0.031    0.031   0.00   0.01
+Start               30    1      1    0.008    0.008    0.008   0.00   0.00
+Start               30    2      1    0.035    0.035    0.035   0.00   0.02
+Start               30    3      1    0.022    0.022    0.022   0.00   0.00
+Start               30    4      1    0.027    0.027    0.027   0.00   0.02
+Start               30    5      1    0.009    0.009    0.009   0.00   0.00
+Start               30    6      1    0.001    0.001    0.001   0.00   0.00
+Start               30    7      1    0.001    0.001    0.001   0.00   0.00
+Start               30    8      1    0.001    0.001    0.001   0.00   0.00
+Start               30    *      9    0.035    0.015    0.001   0.00   0.00
+
+Start               34    0      1    0.002    0.002    0.002   0.00   0.00
+Start               34    1      1    0.001    0.001    0.001   0.00   0.00
+Start               34    2      1    0.001    0.001    0.001   0.00   0.00
+Start               34    3      1    0.009    0.009    0.009   0.00   0.00
+Start               34    4      1    0.029    0.029    0.029   0.00   0.02
+Start               34    5      1    0.023    0.023    0.023   0.00   0.00
+Start               34    6      1    0.025    0.025    0.025   0.00   0.00
+Start               34    7      1     0.01     0.01     0.01   0.00   0.00
+Start               34    8      1    0.032    0.032    0.032   0.00   0.01
+Start               34    *      9    0.032   0.0147    0.001   0.00   0.00
+
+Start               37    0      1    0.002    0.002    0.002   0.00   0.00
+Start               37    1      1    0.003    0.003    0.003   0.00   0.00
+Start               37    2      1    0.001    0.001    0.001   0.00   0.00
+Start               37    3      1    0.002    0.002    0.002   0.00   0.00
+Start               37    4      1    0.002    0.002    0.002   0.00   0.00
+Start               37    5      1    0.001    0.001    0.001   0.00   0.00
+Start               37    6      1    0.002    0.002    0.002   0.00   0.00
+Start               37    7      1    0.002    0.002    0.002   0.00   0.00
+Start               37    8      1    0.002    0.002    0.002   0.00   0.00
+Start               37    *      9    0.003  0.00189    0.001   0.00   0.00
+
+Start               42    0      1    0.005    0.005    0.005   0.00   0.00
+Start               42    1      1    0.004    0.004    0.004   0.00   0.00
+Start               42    2      1    0.005    0.005    0.005   0.00   0.00
+Start               42    3      1    0.002    0.002    0.002   0.00   0.00
+Start               42    4      1    0.002    0.002    0.002   0.00   0.00
+Start               42    5      1    0.001    0.001    0.001   0.00   0.00
+Start               42    6      1    0.001    0.001    0.001   0.00   0.00
+Start               42    7      1    0.001    0.001    0.001   0.00   0.00
+Start               42    8      1    0.002    0.002    0.002   0.00   0.00
+Start               42    *      9    0.005  0.00256    0.001   0.00   0.00
+
+Start               43    0      1    0.001    0.001    0.001   0.00   0.00
+Start               43    1      1    0.001    0.001    0.001   0.00   0.00
+Start               43    2      1    0.002    0.002    0.002   0.00   0.00
+Start               43    3      1    0.002    0.002    0.002   0.00   0.00
+Start               43    4      1    0.001    0.001    0.001   0.00   0.00
+Start               43    5      1    0.001    0.001    0.001   0.00   0.00
+Start               43    6      1    0.002    0.002    0.002   0.00   0.00
+Start               43    7      1    0.002    0.002    0.002   0.00   0.00
+Start               43    8      1    0.001    0.001    0.001   0.00   0.00
+Start               43    *      9    0.002  0.00144    0.001   0.00   0.00
+
+Start               46    0      1    0.001    0.001    0.001   0.00   0.00
+Start               46    1      1    0.001    0.001    0.001   0.00   0.00
+Start               46    2      1    0.001    0.001    0.001   0.00   0.00
+Start               46    3      1    0.001    0.001    0.001   0.00   0.00
+Start               46    4      1    0.001    0.001    0.001   0.00   0.00
+Start               46    5      1    0.001    0.001    0.001   0.00   0.00
+Start               46    6      1    0.001    0.001    0.001   0.00   0.00
+Start               46    7      1    0.001    0.001    0.001   0.00   0.00
+Start               46    8      1    0.001    0.001    0.001   0.00   0.00
+Start               46    *      9    0.001    0.001    0.001   0.00   0.00
+
+Start               47    0      1    0.002    0.002    0.002   0.00   0.00
+Start               47    1      1    0.002    0.002    0.002   0.00   0.00
+Start               47    2      1    0.002    0.002    0.002   0.00   0.00
+Start               47    3      1    0.001    0.001    0.001   0.00   0.00
+Start               47    4      1    0.001    0.001    0.001   0.00   0.00
+Start               47    5      1    0.001    0.001    0.001   0.00   0.00
+Start               47    6      1    0.002    0.002    0.002   0.00   0.00
+Start               47    7      1    0.002    0.002    0.002   0.00   0.00
+Start               47    8      1    0.002    0.002    0.002   0.00   0.00
+Start               47    *      9    0.002  0.00167    0.001   0.00   0.00
+
+Start               49    0      1    0.161    0.161    0.161   0.00   0.04
+Start               49    1      1    0.052    0.052    0.052   0.00   0.00
+Start               49    2      1    0.002    0.002    0.002   0.00   0.00
+Start               49    3      1    0.093    0.093    0.093   0.00   0.01
+Start               49    4      1    0.043    0.043    0.043   0.00   0.03
+Start               49    5      1    0.003    0.003    0.003   0.00   0.00
+Start               49    6      1    0.077    0.077    0.077   0.00   0.01
+Start               49    7      1    0.031    0.031    0.031   0.00   0.01
+Start               49    8      1    0.002    0.002    0.002   0.00   0.00
+Start               49    *      9    0.161   0.0516    0.002   0.00   0.01
+
+Start               51    0      1    0.001    0.001    0.001   0.00   0.00
+Start               51    1      1    0.002    0.002    0.002   0.00   0.00
+Start               51    2      1    0.001    0.001    0.001   0.00   0.00
+Start               51    3      1    0.001    0.001    0.001   0.00   0.00
+Start               51    4      1    0.002    0.002    0.002   0.00   0.00
+Start               51    5      1    0.001    0.001    0.001   0.00   0.00
+Start               51    6      1    0.001    0.001    0.001   0.00   0.00
+Start               51    7      1    0.001    0.001    0.001   0.00   0.00
+Start               51    8      1    0.002    0.002    0.002   0.00   0.00
+Start               51    *      9    0.002  0.00133    0.001   0.00   0.00
+
+Start               52    0      1    0.001    0.001    0.001   0.00   0.00
+Start               52    1      1    0.001    0.001    0.001   0.00   0.00
+Start               52    2      1    0.002    0.002    0.002   0.00   0.00
+Start               52    3      1    0.002    0.002    0.002   0.00   0.00
+Start               52    4      1    0.001    0.001    0.001   0.00   0.00
+Start               52    5      1    0.001    0.001    0.001   0.00   0.00
+Start               52    6      1    0.001    0.001    0.001   0.00   0.00
+Start               52    7      1    0.001    0.001    0.001   0.00   0.00
+Start               52    8      1    0.001    0.001    0.001   0.00   0.00
+Start               52    *      9    0.002  0.00122    0.001   0.00   0.00
+
+Start               54    0      1    0.003    0.003    0.003   0.00   0.00
+Start               54    1      1    0.002    0.002    0.002   0.00   0.00
+Start               54    2      1    0.002    0.002    0.002   0.00   0.00
+Start               54    3      1    0.003    0.003    0.003   0.00   0.00
+Start               54    4      1    0.003    0.003    0.003   0.00   0.00
+Start               54    5      1    0.002    0.002    0.002   0.00   0.00
+Start               54    6      1    0.003    0.003    0.003   0.00   0.00
+Start               54    7      1    0.002    0.002    0.002   0.00   0.00
+Start               54    8      1    0.003    0.003    0.003   0.00   0.00
+Start               54    *      9    0.003  0.00256    0.002   0.00   0.00
+
+Start               56    0      1    0.002    0.002    0.002   0.00   0.00
+Start               56    1      1    0.001    0.001    0.001   0.00   0.00
+Start               56    2      1    0.001    0.001    0.001   0.00   0.00
+Start               56    3      1    0.001    0.001    0.001   0.00   0.00
+Start               56    4      1    0.001    0.001    0.001   0.00   0.00
+Start               56    5      1    0.001    0.001    0.001   0.00   0.00
+Start               56    6      1    0.001    0.001    0.001   0.00   0.00
+Start               56    7      1    0.001    0.001    0.001   0.00   0.00
+Start               56    8      1    0.001    0.001    0.001   0.00   0.00
+Start               56    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Start               57    0      1    0.005    0.005    0.005   0.00   0.00
+Start               57    1      1    0.002    0.002    0.002   0.00   0.00
+Start               57    2      1    0.002    0.002    0.002   0.00   0.00
+Start               57    3      1    0.003    0.003    0.003   0.00   0.00
+Start               57    4      1    0.003    0.003    0.003   0.00   0.00
+Start               57    5      1    0.003    0.003    0.003   0.00   0.00
+Start               57    6      1    0.003    0.003    0.003   0.00   0.00
+Start               57    7      1    0.002    0.002    0.002   0.00   0.00
+Start               57    8      1    0.004    0.004    0.004   0.00   0.00
+Start               57    *      9    0.005    0.003    0.002   0.00   0.00
+
+Start               61    0      1    0.002    0.002    0.002   0.00   0.00
+Start               61    1      1    0.109    0.109    0.109   0.00   0.01
+Start               61    2      1    0.122    0.122    0.122   0.00   0.05
+Start               61    3      1    0.001    0.001    0.001   0.00   0.00
+Start               61    4      1    0.122    0.122    0.122   0.00   0.09
+Start               61    5      1    0.084    0.084    0.084   0.00   0.01
+Start               61    6      1    0.002    0.002    0.002   0.00   0.00
+Start               61    7      1    0.075    0.075    0.075   0.00   0.03
+Start               61    8      1    0.122    0.122    0.122   0.00   0.05
+Start               61    *      9    0.122    0.071    0.001   0.00   0.01
+
+Start               62    0      1    0.007    0.007    0.007   0.00   0.00
+Start               62    1      1    0.001    0.001    0.001   0.00   0.00
+Start               62    2      1    0.004    0.004    0.004   0.00   0.00
+Start               62    3      1    0.001    0.001    0.001   0.00   0.00
+Start               62    4      1    0.001    0.001    0.001   0.00   0.00
+Start               62    5      1    0.001    0.001    0.001   0.00   0.00
+Start               62    6      1    0.001    0.001    0.001   0.00   0.00
+Start               62    7      1    0.001    0.001    0.001   0.00   0.00
+Start               62    8      1    0.001    0.001    0.001   0.00   0.00
+Start               62    *      9    0.007    0.002    0.001   0.00   0.00
+
+Start               65    0      1    0.185    0.185    0.185   0.00   0.05
+Start               65    1      1    0.053    0.053    0.053   0.00   0.00
+Start               65    2      1    0.002    0.002    0.002   0.00   0.00
+Start               65    3      1    0.083    0.083    0.083   0.00   0.01
+Start               65    4      1    0.069    0.069    0.069   0.00   0.05
+Start               65    5      1    0.003    0.003    0.003   0.00   0.00
+Start               65    6      1      0.1      0.1      0.1   0.00   0.01
+Start               65    7      1     0.05     0.05     0.05   0.00   0.02
+Start               65    8      1    0.002    0.002    0.002   0.00   0.00
+Start               65    *      9    0.185   0.0608    0.002   0.00   0.01
+
+Start               67    0      1    0.002    0.002    0.002   0.00   0.00
+Start               67    1      1    0.002    0.002    0.002   0.00   0.00
+Start               67    2      1    0.002    0.002    0.002   0.00   0.00
+Start               67    3      1    0.002    0.002    0.002   0.00   0.00
+Start               67    4      1    0.002    0.002    0.002   0.00   0.00
+Start               67    5      1    0.001    0.001    0.001   0.00   0.00
+Start               67    6      1    0.002    0.002    0.002   0.00   0.00
+Start               67    7      1    0.002    0.002    0.002   0.00   0.00
+Start               67    8      1    0.001    0.001    0.001   0.00   0.00
+Start               67    *      9    0.002  0.00178    0.001   0.00   0.00
+
+Start               70    0      1    0.021    0.021    0.021   0.00   0.01
+Start               70    1      1    0.013    0.013    0.013   0.00   0.00
+Start               70    2      1    0.014    0.014    0.014   0.00   0.01
+Start               70    3      1     0.01     0.01     0.01   0.00   0.00
+Start               70    4      1    0.016    0.016    0.016   0.00   0.01
+Start               70    5      1    0.012    0.012    0.012   0.00   0.00
+Start               70    6      1    0.001    0.001    0.001   0.00   0.00
+Start               70    7      1    0.002    0.002    0.002   0.00   0.00
+Start               70    8      1    0.002    0.002    0.002   0.00   0.00
+Start               70    *      9    0.021   0.0101    0.001   0.00   0.00
+
+Start               71    0      1     0.12     0.12     0.12   0.00   0.03
+Start               71    1      1    0.041    0.041    0.041   0.00   0.00
+Start               71    2      1    0.002    0.002    0.002   0.00   0.00
+Start               71    3      1    0.075    0.075    0.075   0.00   0.01
+Start               71    4      1    0.066    0.066    0.066   0.00   0.05
+Start               71    5      1    0.002    0.002    0.002   0.00   0.00
+Start               71    6      1    0.111    0.111    0.111   0.00   0.01
+Start               71    7      1    0.046    0.046    0.046   0.00   0.02
+Start               71    8      1    0.002    0.002    0.002   0.00   0.00
+Start               71    *      9     0.12   0.0517    0.002   0.00   0.01
+
+Start               74    0      1    0.036    0.036    0.036   0.00   0.01
+Start               74    1      1    0.008    0.008    0.008   0.00   0.00
+Start               74    2      1    0.017    0.017    0.017   0.00   0.01
+Start               74    3      1    0.016    0.016    0.016   0.00   0.00
+Start               74    4      1    0.022    0.022    0.022   0.00   0.02
+Start               74    5      1    0.016    0.016    0.016   0.00   0.00
+Start               74    6      1    0.014    0.014    0.014   0.00   0.00
+Start               74    7      1    0.016    0.016    0.016   0.00   0.01
+Start               74    8      1    0.026    0.026    0.026   0.00   0.01
+Start               74    *      9    0.036    0.019    0.008   0.00   0.00
+
+Start               77    0      1    0.001    0.001    0.001   0.00   0.00
+Start               77    1      1     0.07     0.07     0.07   0.00   0.01
+Start               77    2      1    0.081    0.081    0.081   0.00   0.04
+Start               77    3      1    0.001    0.001    0.001   0.00   0.00
+Start               77    4      1    0.134    0.134    0.134   0.00   0.10
+Start               77    5      1    0.063    0.063    0.063   0.00   0.01
+Start               77    6      1    0.001    0.001    0.001   0.00   0.00
+Start               77    7      1    0.096    0.096    0.096   0.00   0.03
+Start               77    8      1    0.145    0.145    0.145   0.00   0.06
+Start               77    *      9    0.145   0.0658    0.001   0.00   0.01
+
+Start               79    0      1    0.001    0.001    0.001   0.00   0.00
+Start               79    1      1    0.083    0.083    0.083   0.00   0.01
+Start               79    2      1    0.135    0.135    0.135   0.00   0.06
+Start               79    3      1    0.001    0.001    0.001   0.00   0.00
+Start               79    4      1    0.146    0.146    0.146   0.00   0.11
+Start               79    5      1    0.099    0.099    0.099   0.00   0.01
+Start               79    6      1    0.001    0.001    0.001   0.00   0.00
+Start               79    7      1    0.083    0.083    0.083   0.00   0.03
+Start               79    8      1    0.152    0.152    0.152   0.00   0.07
+Start               79    *      9    0.152   0.0779    0.001   0.00   0.01
+
+Start               85    0      1    0.045    0.045    0.045   0.00   0.01
+Start               85    1      1    0.022    0.022    0.022   0.00   0.00
+Start               85    2      1    0.037    0.037    0.037   0.00   0.02
+Start               85    3      1    0.024    0.024    0.024   0.00   0.00
+Start               85    4      1     0.03     0.03     0.03   0.00   0.02
+Start               85    5      1    0.028    0.028    0.028   0.00   0.00
+Start               85    6      1    0.002    0.002    0.002   0.00   0.00
+Start               85    7      1    0.002    0.002    0.002   0.00   0.00
+Start               85    8      1    0.002    0.002    0.002   0.00   0.00
+Start               85    *      9    0.045   0.0213    0.002   0.00   0.00
+
+Start               91    0      1    0.022    0.022    0.022   0.00   0.01
+Start               91    1      1    0.009    0.009    0.009   0.00   0.00
+Start               91    2      1    0.015    0.015    0.015   0.00   0.01
+Start               91    3      1    0.032    0.032    0.032   0.00   0.00
+Start               91    4      1    0.058    0.058    0.058   0.00   0.04
+Start               91    5      1    0.042    0.042    0.042   0.00   0.00
+Start               91    6      1    0.033    0.033    0.033   0.00   0.00
+Start               91    7      1    0.029    0.029    0.029   0.00   0.01
+Start               91    8      1    0.058    0.058    0.058   0.00   0.03
+Start               91    *      9    0.058   0.0331    0.009   0.00   0.01
+
+Start               93    0      1    0.028    0.028    0.028   0.00   0.01
+Start               93    1      1    0.008    0.008    0.008   0.00   0.00
+Start               93    2      1    0.019    0.019    0.019   0.00   0.01
+Start               93    3      1    0.029    0.029    0.029   0.00   0.00
+Start               93    4      1    0.024    0.024    0.024   0.00   0.02
+Start               93    5      1    0.008    0.008    0.008   0.00   0.00
+Start               93    6      1    0.001    0.001    0.001   0.00   0.00
+Start               93    7      1    0.001    0.001    0.001   0.00   0.00
+Start               93    8      1    0.001    0.001    0.001   0.00   0.00
+Start               93    *      9    0.029   0.0132    0.001   0.00   0.00
+
+Start               94    0      1    0.001    0.001    0.001   0.00   0.00
+Start               94    1      1    0.001    0.001    0.001   0.00   0.00
+Start               94    2      1    0.001    0.001    0.001   0.00   0.00
+Start               94    3      1    0.001    0.001    0.001   0.00   0.00
+Start               94    4      1    0.001    0.001    0.001   0.00   0.00
+Start               94    5      1    0.001    0.001    0.001   0.00   0.00
+Start               94    6      1    0.001    0.001    0.001   0.00   0.00
+Start               94    7      1    0.001    0.001    0.001   0.00   0.00
+Start               94    8      1    0.001    0.001    0.001   0.00   0.00
+Start               94    *      9    0.001    0.001    0.001   0.00   0.00
+
+Start               99    0      1    0.001    0.001    0.001   0.00   0.00
+Start               99    1      1    0.001    0.001    0.001   0.00   0.00
+Start               99    2      1    0.001    0.001    0.001   0.00   0.00
+Start               99    3      1    0.011    0.011    0.011   0.00   0.00
+Start               99    4      1    0.025    0.025    0.025   0.00   0.02
+Start               99    5      1    0.005    0.005    0.005   0.00   0.00
+Start               99    6      1    0.007    0.007    0.007   0.00   0.00
+Start               99    7      1     0.01     0.01     0.01   0.00   0.00
+Start               99    8      1    0.028    0.028    0.028   0.00   0.01
+Start               99    *      9    0.028  0.00989    0.001   0.00   0.00
+
+Startall            25    0    301    0.068   0.0153    0.002   0.02   1.26
+Startall            25    1    301    0.021  0.00524    0.002   0.01   0.14
+Startall            25    2    301    0.021   0.0118    0.002   0.01   1.57
+Startall            25    3    301    0.009  0.00514    0.002   0.01   0.13
+Startall            25    4    301    0.041   0.0139    0.002   0.02   3.05
+Startall            25    5    301    0.007  0.00343    0.002   0.00   0.09
+Startall            25    6    301    0.015  0.00409    0.002   0.00   0.10
+Startall            25    7    301    0.033   0.0122    0.003   0.01   1.30
+Startall            25    8    301    0.022   0.0083    0.003   0.01   1.10
+Startall            25    *   2709    0.068  0.00883    0.002   0.01   0.41
+
+Startall            39    0    301    0.106    0.034    0.023   0.04   2.79
+Startall            39    1    301    0.132   0.0556     0.04   0.06   1.51
+Startall            39    2    301    0.104     0.04    0.026   0.04   5.30
+Startall            39    3    301    0.108   0.0363    0.025   0.04   0.93
+Startall            39    4    301    0.149   0.0524    0.043   0.06  11.50
+Startall            39    5    301    0.107     0.04    0.029   0.04   1.03
+Startall            39    6    301    0.104   0.0288    0.018   0.03   0.74
+Startall            39    7    301     0.14   0.0624    0.045   0.07   6.64
+Startall            39    8    301    0.116   0.0334    0.026   0.04   4.42
+Startall            39    *   2709    0.149   0.0425    0.018   0.05   1.96
+
+Startall            78    0    301    0.028   0.0169    0.003   0.02   1.39
+Startall            78    1    301    0.037  0.00564    0.003   0.01   0.15
+Startall            78    2    301    0.028    0.013    0.002   0.01   1.72
+Startall            78    3    301    0.015  0.00647    0.003   0.01   0.17
+Startall            78    4    301    0.029   0.0144    0.003   0.02   3.16
+Startall            78    5    301    0.012  0.00433    0.003   0.00   0.11
+Startall            78    6    301    0.009   0.0048    0.003   0.01   0.12
+Startall            78    7    301    0.032   0.0134    0.003   0.01   1.42
+Startall            78    8    301    0.024  0.00863    0.003   0.01   1.14
+Startall            78    *   2709    0.037  0.00973    0.002   0.01   0.45
+
+Startall            83    0    301    0.071   0.0334    0.021   0.04   2.74
+Startall            83    1    301    0.104   0.0495    0.035   0.05   1.34
+Startall            83    2    301    0.055   0.0338     0.02   0.04   4.48
+Startall            83    3    301     0.08    0.039    0.026   0.04   1.00
+Startall            83    4    301    0.076    0.044    0.037   0.05   9.66
+Startall            83    5    301    0.093   0.0455    0.027   0.05   1.17
+Startall            83    6    301    0.058   0.0304     0.02   0.03   0.78
+Startall            83    7    301    0.092   0.0545    0.034   0.06   5.80
+Startall            83    8    301    0.041   0.0258    0.021   0.03   3.41
+Startall            83    *   2709    0.104   0.0395     0.02   0.04   1.83
+
+Test                35    0   1204    0.089   0.0133    0.002   0.06   4.35
+Test                35    1 245164     0.11  0.00177    0.001   1.56  38.99
+Test                35    2   1204     0.09    0.013    0.002   0.06   6.90
+Test                35    3 311290    0.125  0.00165    0.001   1.85  43.57
+Test                35    4   1211    0.122    0.031    0.004   0.14  27.42
+Test                35    5 301942    0.099  0.00167    0.001   1.81  43.17
+Test                35    6 246082    0.087   0.0017    0.001   1.51  35.66
+Test                35    7   1665    0.103   0.0226    0.001   0.14  13.28
+Test                35    8   1204    0.146   0.0235    0.001   0.10  12.43
+Test                35    * 1110966    0.146   0.0018    0.001   0.80  34.13
+
+Test                84    0   1204    0.078   0.0124    0.002   0.05   4.07
+Test                84    1   1204    0.114   0.0316    0.003   0.14   3.43
+Test                84    2   1204    0.127   0.0116    0.002   0.05   6.12
+Test                84    3   1204    0.076   0.0232    0.002   0.10   2.38
+Test                84    4   1229    0.134   0.0265    0.003   0.12  23.75
+Test                84    5   1204    0.076   0.0217    0.003   0.09   2.24
+Test                84    6   1204     0.09    0.024    0.002   0.10   2.46
+Test                84    7   1204     0.13   0.0291    0.003   0.13  12.37
+Test                84    8   1204    0.144   0.0233    0.002   0.10  12.34
+Test                84    *  10861    0.144   0.0226    0.002   0.10   4.18
+
+Type_commit         76    0      1    0.085    0.085    0.085   0.00   0.02
+Type_commit         76    1      1    0.164    0.164    0.164   0.00   0.01
+Type_commit         76    2      1    0.091    0.091    0.091   0.00   0.04
+Type_commit         76    3      1    0.166    0.166    0.166   0.00   0.01
+Type_commit         76    4      1    0.097    0.097    0.097   0.00   0.07
+Type_commit         76    5      1    0.094    0.094    0.094   0.00   0.01
+Type_commit         76    6      1    0.095    0.095    0.095   0.00   0.01
+Type_commit         76    7      1    0.087    0.087    0.087   0.00   0.03
+Type_commit         76    8      1    0.133    0.133    0.133   0.00   0.06
+Type_commit         76    *      9    0.166    0.112    0.085   0.00   0.02
+
+Type_commit         87    0      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    1      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    2      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    3      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    4      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    5      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    6      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    7      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    8      1    0.002    0.002    0.002   0.00   0.00
+Type_commit         87    *      9    0.002    0.002    0.002   0.00   0.00
+
+Wait                 1    0      1    0.003    0.003    0.003   0.00   0.00
+Wait                 1    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                 1    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                 1    3      1    0.002    0.002    0.002   0.00   0.00
+Wait                 1    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                 1    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                 1    6      1    0.003    0.003    0.003   0.00   0.00
+Wait                 1    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                 1    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                 1    *      9    0.003  0.00156    0.001   0.00   0.00
+
+Wait                 3    0      1    0.006    0.006    0.006   0.00   0.00
+Wait                 3    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    6      1    0.002    0.002    0.002   0.00   0.00
+Wait                 3    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                 3    *      9    0.006  0.00167    0.001   0.00   0.00
+
+Wait                 5    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    1      1    0.002    0.002    0.002   0.00   0.00
+Wait                 5    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    6      1    0.002    0.002    0.002   0.00   0.00
+Wait                 5    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                 5    *      9    0.002  0.00122    0.001   0.00   0.00
+
+Wait                 6    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                 6    1      1    0.002    0.002    0.002   0.00   0.00
+Wait                 6    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                 6    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                 6    4      1    0.003    0.003    0.003   0.00   0.00
+Wait                 6    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                 6    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                 6    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                 6    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                 6    *      9    0.003  0.00144    0.001   0.00   0.00
+
+Wait                 8    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                 8    1      1    0.002    0.002    0.002   0.00   0.00
+Wait                 8    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                 8    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                 8    4      1    0.003    0.003    0.003   0.00   0.00
+Wait                 8    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                 8    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                 8    7      1    0.003    0.003    0.003   0.00   0.00
+Wait                 8    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                 8    *      9    0.003  0.00189    0.001   0.00   0.00
+
+Wait                 9    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    1      1    0.002    0.002    0.002   0.00   0.00
+Wait                 9    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                 9    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Wait                13    0      1    0.002    0.002    0.002   0.00   0.00
+Wait                13    1      1    0.015    0.015    0.015   0.00   0.00
+Wait                13    2      1     1.17     1.17     1.17   0.00   0.51
+Wait                13    3      1    0.002    0.002    0.002   0.00   0.00
+Wait                13    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                13    5      1    0.013    0.013    0.013   0.00   0.00
+Wait                13    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                13    7      1    0.051    0.051    0.051   0.00   0.02
+Wait                13    8      1    0.536    0.536    0.536   0.00   0.24
+Wait                13    *      9     1.17    0.199    0.001   0.00   0.03
+
+Wait                15    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    3      1    0.014    0.014    0.014   0.00   0.00
+Wait                15    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                15    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                15    *      9    0.014  0.00256    0.001   0.00   0.00
+
+Wait                16    0      1     12.6     12.6     12.6   0.05   3.44
+Wait                16    1      1    0.036    0.036    0.036   0.00   0.00
+Wait                16    2      1    0.022    0.022    0.022   0.00   0.01
+Wait                16    3      1    0.011    0.011    0.011   0.00   0.00
+Wait                16    4      1    0.002    0.002    0.002   0.00   0.00
+Wait                16    5      1    0.016    0.016    0.016   0.00   0.00
+Wait                16    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                16    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                16    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                16    *      9     12.6     1.41    0.001   0.01   0.22
+
+Wait                21    0      1    0.002    0.002    0.002   0.00   0.00
+Wait                21    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                21    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                21    3      1    0.018    0.018    0.018   0.00   0.00
+Wait                21    4      1     4.25     4.25     4.25   0.02   3.10
+Wait                21    5      1    0.006    0.006    0.006   0.00   0.00
+Wait                21    6      1    0.028    0.028    0.028   0.00   0.00
+Wait                21    7      1    0.017    0.017    0.017   0.00   0.01
+Wait                21    8      1     3.25     3.25     3.25   0.01   1.43
+Wait                21    *      9     4.25    0.842    0.001   0.00   0.13
+
+Wait                22    0      1     4.17     4.17     4.17   0.02   1.14
+Wait                22    1      1     0.02     0.02     0.02   0.00   0.00
+Wait                22    2      1    0.226    0.226    0.226   0.00   0.10
+Wait                22    3      1    0.009    0.009    0.009   0.00   0.00
+Wait                22    4      1    0.002    0.002    0.002   0.00   0.00
+Wait                22    5      1    0.009    0.009    0.009   0.00   0.00
+Wait                22    6      1    0.002    0.002    0.002   0.00   0.00
+Wait                22    7      1    0.002    0.002    0.002   0.00   0.00
+Wait                22    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                22    *      9     4.17    0.494    0.002   0.00   0.08
+
+Wait                23    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                23    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                23    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                23    3      1    0.023    0.023    0.023   0.00   0.00
+Wait                23    4      1     12.4     12.4     12.4   0.04   9.05
+Wait                23    5      1    0.012    0.012    0.012   0.00   0.00
+Wait                23    6      1    0.025    0.025    0.025   0.00   0.00
+Wait                23    7      1     0.03     0.03     0.03   0.00   0.01
+Wait                23    8      1     10.1     10.1     10.1   0.04   4.43
+Wait                23    *      9     12.4     2.51    0.001   0.01   0.38
+
+Wait                24    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                24    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                24    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                24    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                24    4      1    0.086    0.086    0.086   0.00   0.06
+Wait                24    5      1     0.01     0.01     0.01   0.00   0.00
+Wait                24    6      1     0.02     0.02     0.02   0.00   0.00
+Wait                24    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                24    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                24    *      9    0.086   0.0136    0.001   0.00   0.00
+
+Wait                27    0      1     0.02     0.02     0.02   0.00   0.01
+Wait                27    1      1    0.011    0.011    0.011   0.00   0.00
+Wait                27    2      1    0.014    0.014    0.014   0.00   0.01
+Wait                27    3      1    0.011    0.011    0.011   0.00   0.00
+Wait                27    4      1     0.01     0.01     0.01   0.00   0.01
+Wait                27    5      1    0.011    0.011    0.011   0.00   0.00
+Wait                27    6      1    0.012    0.012    0.012   0.00   0.00
+Wait                27    7      1     0.01     0.01     0.01   0.00   0.00
+Wait                27    8      1    0.012    0.012    0.012   0.00   0.01
+Wait                27    *      9     0.02   0.0123     0.01   0.00   0.00
+
+Wait                28    0      1     0.11     0.11     0.11   0.00   0.03
+Wait                28    1      1    0.083    0.083    0.083   0.00   0.01
+Wait                28    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                28    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                28    4      1    0.002    0.002    0.002   0.00   0.00
+Wait                28    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                28    6      1    0.026    0.026    0.026   0.00   0.00
+Wait                28    7      1    0.002    0.002    0.002   0.00   0.00
+Wait                28    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                28    *      9     0.11   0.0254    0.001   0.00   0.00
+
+Wait                31    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                31    1      1    0.033    0.033    0.033   0.00   0.00
+Wait                31    2      1    0.113    0.113    0.113   0.00   0.05
+Wait                31    3      1    0.002    0.002    0.002   0.00   0.00
+Wait                31    4      1    0.032    0.032    0.032   0.00   0.02
+Wait                31    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                31    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                31    7      1    0.129    0.129    0.129   0.00   0.05
+Wait                31    8      1    0.122    0.122    0.122   0.00   0.05
+Wait                31    *      9    0.129   0.0482    0.001   0.00   0.01
+
+Wait                33    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                33    *      9    0.001    0.001    0.001   0.00   0.00
+
+Wait                38    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                38    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                38    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                38    *      9    0.002  0.00122    0.001   0.00   0.00
+
+Wait                41    0      1    0.007    0.007    0.007   0.00   0.00
+Wait                41    1      1    0.003    0.003    0.003   0.00   0.00
+Wait                41    2      1    0.006    0.006    0.006   0.00   0.00
+Wait                41    3      1    0.002    0.002    0.002   0.00   0.00
+Wait                41    4      1    0.002    0.002    0.002   0.00   0.00
+Wait                41    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                41    6      1    0.002    0.002    0.002   0.00   0.00
+Wait                41    7      1    0.002    0.002    0.002   0.00   0.00
+Wait                41    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                41    *      9    0.007  0.00311    0.002   0.00   0.00
+
+Wait                44    0      1    0.002    0.002    0.002   0.00   0.00
+Wait                44    1      1    0.002    0.002    0.002   0.00   0.00
+Wait                44    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                44    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                44    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                44    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                44    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                44    7      1    0.002    0.002    0.002   0.00   0.00
+Wait                44    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                44    *      9    0.002  0.00133    0.001   0.00   0.00
+
+Wait                45    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                45    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                45    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                45    3      1    0.002    0.002    0.002   0.00   0.00
+Wait                45    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                45    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                45    6      1    0.002    0.002    0.002   0.00   0.00
+Wait                45    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                45    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                45    *      9    0.002  0.00133    0.001   0.00   0.00
+
+Wait                50    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                50    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                50    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                50    *      9    0.002  0.00122    0.001   0.00   0.00
+
+Wait                55    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    4      1    0.002    0.002    0.002   0.00   0.00
+Wait                55    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                55    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Wait                68    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                68    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                68    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                68    3      1     0.02     0.02     0.02   0.00   0.00
+Wait                68    4      1    0.058    0.058    0.058   0.00   0.04
+Wait                68    5      1     0.09     0.09     0.09   0.00   0.01
+Wait                68    6      1    0.027    0.027    0.027   0.00   0.00
+Wait                68    7      1     0.04     0.04     0.04   0.00   0.01
+Wait                68    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                68    *      9     0.09   0.0266    0.001   0.00   0.00
+
+Wait                69    0      1    0.014    0.014    0.014   0.00   0.00
+Wait                69    1      1    0.035    0.035    0.035   0.00   0.00
+Wait                69    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                69    3      1    0.089    0.089    0.089   0.00   0.01
+Wait                69    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                69    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                69    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                69    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                69    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                69    *      9    0.089   0.0161    0.001   0.00   0.00
+
+Wait                72    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                72    *      9    0.001    0.001    0.001   0.00   0.00
+
+Wait                75    0      1    0.112    0.112    0.112   0.00   0.03
+Wait                75    1      1    0.026    0.026    0.026   0.00   0.00
+Wait                75    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                75    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                75    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                75    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                75    6      1    0.019    0.019    0.019   0.00   0.00
+Wait                75    7      1    0.002    0.002    0.002   0.00   0.00
+Wait                75    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                75    *      9    0.112   0.0184    0.001   0.00   0.00
+
+Wait                86    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                86    1      1    0.034    0.034    0.034   0.00   0.00
+Wait                86    2      1    0.303    0.303    0.303   0.00   0.13
+Wait                86    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                86    4      1    0.076    0.076    0.076   0.00   0.06
+Wait                86    5      1    0.026    0.026    0.026   0.00   0.00
+Wait                86    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                86    7      1    0.025    0.025    0.025   0.00   0.01
+Wait                86    8      1    0.427    0.427    0.427   0.00   0.19
+Wait                86    *      9    0.427   0.0993    0.001   0.00   0.02
+
+Wait                89    0      1    0.344    0.344    0.344   0.00   0.09
+Wait                89    1      1    0.018    0.018    0.018   0.00   0.00
+Wait                89    2      1    0.005    0.005    0.005   0.00   0.00
+Wait                89    3      1    0.014    0.014    0.014   0.00   0.00
+Wait                89    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                89    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                89    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                89    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                89    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                89    *      9    0.344    0.043    0.001   0.00   0.01
+
+Wait                90    0      1    0.001    0.001    0.001   0.00   0.00
+Wait                90    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                90    2      1    0.117    0.117    0.117   0.00   0.05
+Wait                90    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                90    4      1    0.024    0.024    0.024   0.00   0.02
+Wait                90    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                90    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                90    7      1    0.013    0.013    0.013   0.00   0.00
+Wait                90    8      1     0.15     0.15     0.15   0.00   0.07
+Wait                90    *      9     0.15   0.0343    0.001   0.00   0.01
+
+Wait                95    0      1    0.116    0.116    0.116   0.00   0.03
+Wait                95    1      1    0.015    0.015    0.015   0.00   0.00
+Wait                95    2      1    0.002    0.002    0.002   0.00   0.00
+Wait                95    3      1    0.023    0.023    0.023   0.00   0.00
+Wait                95    4      1    0.002    0.002    0.002   0.00   0.00
+Wait                95    5      1    0.002    0.002    0.002   0.00   0.00
+Wait                95    6      1    0.022    0.022    0.022   0.00   0.00
+Wait                95    7      1    0.022    0.022    0.022   0.00   0.01
+Wait                95    8      1    0.002    0.002    0.002   0.00   0.00
+Wait                95    *      9    0.116   0.0229    0.002   0.00   0.00
+
+Wait                97    0      1    0.002    0.002    0.002   0.00   0.00
+Wait                97    1      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    2      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    3      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    4      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    5      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    6      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    7      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    8      1    0.001    0.001    0.001   0.00   0.00
+Wait                97    *      9    0.002  0.00111    0.001   0.00   0.00
+
+Waitall             12    0    301    0.003  0.00208    0.001   0.00   0.17
+Waitall             12    1    301    0.005  0.00268    0.002   0.00   0.07
+Waitall             12    2    301    0.005  0.00261    0.001   0.00   0.35
+Waitall             12    3    301    0.005  0.00225    0.001   0.00   0.06
+Waitall             12    4    301    0.004  0.00212    0.001   0.00   0.46
+Waitall             12    5    301    0.004  0.00225    0.001   0.00   0.06
+Waitall             12    6    301    0.004  0.00226    0.001   0.00   0.06
+Waitall             12    7    301    0.006  0.00298    0.002   0.00   0.32
+Waitall             12    8    301    0.003  0.00183    0.001   0.00   0.24
+Waitall             12    *   2709    0.006  0.00234    0.001   0.00   0.11
+
+Waitall             17    0    301    0.018  0.00703    0.003   0.01   0.58
+Waitall             17    1    301    0.015  0.00554    0.003   0.01   0.15
+Waitall             17    2    301    0.015  0.00466    0.003   0.01   0.62
+Waitall             17    3    301    0.015  0.00393    0.002   0.00   0.10
+Waitall             17    4    301    0.015  0.00481    0.002   0.01   1.06
+Waitall             17    5    301    0.023  0.00382    0.002   0.00   0.10
+Waitall             17    6    301    0.015  0.00431    0.002   0.00   0.11
+Waitall             17    7    301    0.016   0.0056    0.003   0.01   0.60
+Waitall             17    8    301    0.015  0.00431    0.002   0.00   0.57
+Waitall             17    *   2709    0.023  0.00489    0.002   0.01   0.23
+
+---------------------------------------------------------------------------
+@--- Callsite Message Sent statistics (all, sent bytes) -------------------
+---------------------------------------------------------------------------
+Name              Site Rank   Count       Max      Mean       Min       Sum
+Allreduce           58    0      15         4         4         4        60
+Allreduce           58    1      15         4         4         4        60
+Allreduce           58    2      15         4         4         4        60
+Allreduce           58    3      15         4         4         4        60
+Allreduce           58    4      15         4         4         4        60
+Allreduce           58    5      15         4         4         4        60
+Allreduce           58    6      15         4         4         4        60
+Allreduce           58    7      15         4         4         4        60
+Allreduce           58    8      15         4         4         4        60
+Allreduce           58    *     135         4         4         4       540
+
+---------------------------------------------------------------------------
+@--- End of Report --------------------------------------------------------
+---------------------------------------------------------------------------
